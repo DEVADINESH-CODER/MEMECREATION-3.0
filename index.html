@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memeverse - Where Memes Speak Louder Than Words</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        .floating-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .theme-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        .theme-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        .timeline-item {
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 12px;
+            top: 20px;
+            width: 18px;
+            height: 18px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            z-index: 1;
+        }
+        
+        .mascot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .mascot:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+        
+        .bounce {
+            animation: bounce 0.5s ease;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(15deg); }
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce-vertical 2s infinite;
+        }
+        
+        @keyframes bounce-vertical {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <!-- Floating Mascot -->
+    <div class="mascot floating-animation" onclick="bounceMascot()">🤖</div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-900/90 backdrop-blur-sm z-50 border-b border-purple-500/20">
+        <div class="container mx-auto px-6 py-3">
+            <!-- Top Row -->
+            <div class="flex justify-between items-center mb-2">
+                <!-- Left - College Info -->
+                <div class="flex items-center">
+                    <img src="https://imgs.search.brave.com/u4cNggCd8oj5xtMo6fSkgB758PkEYi7g8KssWKz5iwY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ha20t/aW1nLWEtaW4udG9z/c2h1Yi5jb20vc2l0/ZXMvcmVzb3VyY2Vz/L2NhbXB1cy9wcm9k/L2ltZy9sb2dvLzIw/MjMvOS9sb2dvMTI0/NzMwNzU3MDg5Ny5q/cGc" 
+                         alt="APEC Logo" 
+                         class="h-12 w-auto object-contain mr-3">
+                    <div class="text-left">
+                        <div class="text-sm text-white font-medium">Adhiparasakthi Engineering College</div>
+                        <div class="text-xs text-gray-400">Melmaruvathur-603319</div>
+                        <div class="text-xs text-purple-300">Department of Computer Science and Engineering</div> 
+                    </div>
+                </div>
+
+                <!-- Right - CSI Info -->
+                <div class="flex items-center space-x-3">
+                    <div class="text-right">
+                        <p class="text-xs text-white">In association with</p>
+                        <p class="text-xs font-medium text-blue-300">CSI Kancheepuram</p>
+                    </div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8AktAs8ohWJZqTUs7z0qBSLQ-CqdH2X5GBg&s" 
+                         alt="CSI Logo" 
+                         class="h-10 w-auto object-contain"
+                         style="min-width: 40px;">
+                </div>
+            </div>
+
+            <!-- Bottom Row - Centered Title -->
+            <div class="flex flex-col items-center">
+                <div class="text-orange-400 text-sm font-medium tracking-wider mb-1">Organises</div>
+                <h1 class="text-3xl md:text-4xl font-bold text-center text-white bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
+                    MEMEVERSE 3.0
+                </h1>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex justify-center space-x-8 mt-3">
+                <a href="#home" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Home</a>
+                <a href="#about" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">About</a>
+                <a href="#themes" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Themes</a>
+                <a href="#rules" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Rules</a>
+                <a href="#register" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Register</a>
+            </div>
+            <button class="md:hidden text-white" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed top-0 left-0 w-full h-full bg-gray-900/95 backdrop-blur-sm z-40 hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
+            <a href="#home" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">Home</a>
+            <a href="#about" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">About</a>
+            <a href="#themes" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">Themes</a>
+            <a href="#rules" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">Rules</a>
+            <a href="#register" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">Register</a>
+        </div>
+    </div>
+
+    <!-- Landing Page -->
+    <section id="home" class="min-h-screen gradient-bg flex items-center justify-center relative pt-32 pb-16">
+        <div class="container mx-auto px-6 text-center">
+            <div data-aos="fade-down" data-aos-duration="1000" class="pt-8">
+                <h1 class="text-6xl md:text-8xl font-bold mb-4 text-white">
+                    MEMEVERSE 3.0
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-purple-100">
+                    Where Memes Speak Louder Than Words
+                </p>
+            </div>
+            
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" class="mb-12">
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto">
+                    <div class="grid md:grid-cols-3 gap-6 text-center">
+                        <div>
+                            <i class="fas fa-calendar-alt text-3xl text-purple-300 mb-2"></i>
+                            <p class="font-semibold">Competition Date</p>
+                            <p class="text-purple-200">July 31, 2024</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-map-marker-alt text-3xl text-purple-300 mb-2"></i>
+                            <p class="font-semibold">Venue</p>
+                            <p class="text-purple-200">APEC Campus</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-graduation-cap text-3xl text-purple-300 mb-2"></i>
+                            <p class="font-semibold">Open For</p>
+                            <p class="text-purple-200">All Departments</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="600">
+                <a href="#register" class="inline-block bg-white text-purple-600 px-12 py-4 rounded-full text-xl font-bold hover:bg-purple-100 transition-all duration-300 neon-glow pulse-animation">
+                    Register Now 🚀
+                </a>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down text-white text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-800 relative z-10">
+        <div class="container mx-auto px-6">
+            <div data-aos="fade-up" class="text-center mb-16">
+                <h2 class="text-5xl font-bold gradient-text mb-6">About Memeverse 3.0</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-16 items-start">
+                    <div data-aos="fade-right" data-aos-duration="1000" class="space-y-8">
+                        <div class="text-center lg:text-left">
+                            <div class="text-6xl mb-6">🎭</div>
+                            <h3 class="text-3xl font-bold mb-6 text-purple-300">The Ultimate Meme Battle</h3>
+                        </div>
+                        
+                        <div class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/20">
+                            <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                                Memeverse 3.0 is the most creative and hilarious meme competition designed exclusively for 2nd and 3rd-year students from all engineering departments. 
+                                It's where creativity meets humor, and where the best memes rise to legendary status!
+                            </p>
+                            <p class="text-lg text-gray-300 leading-relaxed">
+                                Organized at Adhiparasakthi Engineering College, 
+                                this competition celebrates the art of meme-making and digital creativity across all engineering disciplines.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-6 rounded-2xl">
+                            <h4 class="text-xl font-bold mb-4 text-center gradient-text">Why Participate?</h4>
+                            <ul class="space-y-3 text-gray-300">
+                                <li class="flex items-center"><i class="fas fa-star text-yellow-400 mr-3"></i>Showcase your creativity</li>
+                                <li class="flex items-center"><i class="fas fa-trophy text-yellow-400 mr-3"></i>Win exciting prizes</li>
+                                <li class="flex items-center"><i class="fas fa-users text-yellow-400 mr-3"></i>Connect with fellow memers</li>
+                                <li class="flex items-center"><i class="fas fa-certificate text-yellow-400 mr-3"></i>Get recognition</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div data-aos="fade-left" data-aos-duration="1000" class="space-y-6">
+                        <h4 class="text-2xl font-bold text-center mb-8 gradient-text">Competition Highlights</h4>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="bg-purple-600/20 p-6 rounded-2xl text-center border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300">
+                                <div class="text-4xl mb-4">🏆</div>
+                                <h4 class="font-bold text-xl mb-2 text-purple-300">Competition</h4>
+                                <p class="text-purple-200">Single Round Format</p>
+                            </div>
+                            
+                            <div class="bg-blue-600/20 p-6 rounded-2xl text-center border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300">
+                                <div class="text-4xl mb-4">🎯</div>
+                                <h4 class="font-bold text-xl mb-2 text-blue-300">Themes</h4>
+                                <p class="text-blue-200">6 Unique Categories</p>
+                            </div>
+                            
+                            <div class="bg-green-600/20 p-6 rounded-2xl text-center border border-green-500/30 hover:border-green-400/50 transition-all duration-300">
+                                <div class="text-4xl mb-4">👥</div>
+                                <h4 class="font-bold text-xl mb-2 text-green-300">Participants</h4>
+                                <p class="text-green-200">All Departments Welcome</p>
+                            </div>
+                            
+                            <div class="bg-pink-600/20 p-6 rounded-2xl text-center border border-pink-500/30 hover:border-pink-400/50 transition-all duration-300">
+                                <div class="text-4xl mb-4">🎨</div>
+                                <h4 class="font-bold text-xl mb-2 text-pink-300">Format</h4>
+                                <p class="text-pink-200">Individual Participation</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-600/30 mt-8">
+                            <div class="text-center">
+                                <div class="text-4xl mb-4">🎉</div>
+                                <h4 class="text-xl font-bold mb-3 text-yellow-300">Ready to Join?</h4>
+                                <p class="text-gray-300 mb-4">Register now and let your creativity shine!</p>
+                                <a href="#register" class="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-bold hover:from-purple-700 hover:to-blue-700 transition-all duration-300">
+                                    Start Registration →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Themes Section -->
+    <section id="themes" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div data-aos="fade-up" class="text-center mb-16">
+                <h2 class="text-5xl font-bold gradient-text mb-6">Meme Themes</h2>
+                <p class="text-xl text-gray-300">Choose your battlefield and create the ultimate meme!</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-6"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div data-aos="fade-up" data-aos-delay="100" class="theme-card p-8 rounded-2xl">
+                    <div class="text-5xl mb-4">💻</div>
+                    <h3 class="text-2xl font-bold mb-4 text-purple-300">Online vs Offline Classes</h3>
+                    <p class="text-gray-300">The eternal struggle between pajama comfort and actual pants!</p>
+                </div>
+                
+                <div data-aos="fade-up" data-aos-delay="200" class="theme-card p-8 rounded-2xl">
+                    <div class="text-5xl mb-4">🤖</div>
+                    <h3 class="text-2xl font-bold mb-4 text-blue-300">ChatGPT Life</h3>
+                    <p class="text-gray-300">When AI becomes your best study buddy and worst enemy!</p>
+                </div>
+                
+                <div data-aos="fade-up" data-aos-delay="300" class="theme-card p-8 rounded-2xl">
+                    <div class="text-5xl mb-4">📱</div>
+                    <h3 class="text-2xl font-bold mb-4 text-green-300">Instagram vs Reality</h3>
+                    <p class="text-gray-300">The art of making your life look way cooler than it actually is!</p>
+                </div>
+                
+                <div data-aos="fade-up" data-aos-delay="400" class="theme-card p-8 rounded-2xl">
+                    <div class="text-5xl mb-4">😈</div>
+                    <h3 class="text-2xl font-bold mb-4 text-red-300">Toxic Friendships</h3>
+                    <p class="text-gray-300">Those friends who are chaos but you can't live without them!</p>
+                </div>
+                
+                <div data-aos="fade-up" data-aos-delay="500" class="theme-card p-8 rounded-2xl">
+                    <div class="text-5xl mb-4">💬</div>
+                    <h3 class="text-2xl font-bold mb-4 text-yellow-300">Tanglish Messages</h3>
+                    <p class="text-gray-300">When Tamil meets English and creates pure comedy gold!</p>
+                </div>
+                
+                <div data-aos="fade-up" data-aos-delay="600" class="theme-card p-8 rounded-2xl">
+                    <div class="text-5xl mb-4">🧠</div>
+                    <h3 class="text-2xl font-bold mb-4 text-pink-300">Brain During Exams</h3>
+                    <p class="text-gray-300">The epic battle between knowledge and complete mental breakdown!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules Section -->
+    <section id="rules" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <div data-aos="fade-up" class="text-center mb-16">
+                <h2 class="text-5xl font-bold gradient-text mb-6">Rules & Guidelines</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div data-aos="fade-right" data-aos-delay="100" class="bg-purple-600/10 p-8 rounded-2xl">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-users text-3xl text-purple-400 mr-4"></i>
+                            <h3 class="text-2xl font-bold">Eligibility</h3>
+                        </div>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Open to 2nd & 3rd year students from all departments</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Individual participation only</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>One entry per participant</li>
+                        </ul>
+                    </div>
+                    
+                    <div data-aos="fade-left" data-aos-delay="200" class="bg-blue-600/10 p-8 rounded-2xl">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-image text-3xl text-blue-400 mr-4"></i>
+                            <h3 class="text-2xl font-bold">Content Rules</h3>
+                        </div>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Original content only</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>No offensive or inappropriate content</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Must relate to chosen theme</li>
+                        </ul>
+                    </div>
+                    
+                    <div data-aos="fade-right" data-aos-delay="300" class="bg-green-600/10 p-8 rounded-2xl">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-clock text-3xl text-green-400 mr-4"></i>
+                            <h3 class="text-2xl font-bold">Submission</h3>
+                        </div>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Submit before deadline</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>High-quality image format</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Include team/individual details</li>
+                        </ul>
+                    </div>
+                    
+                    <div data-aos="fade-left" data-aos-delay="400" class="bg-pink-600/10 p-8 rounded-2xl">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-trophy text-3xl text-pink-400 mr-4"></i>
+                            <h3 class="text-2xl font-bold">Judging</h3>
+                        </div>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Creativity & originality</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Humor & relatability</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-3"></i>Theme adherence</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div data-aos="fade-up" class="text-center mb-16">
+                <h2 class="text-5xl font-bold gradient-text mb-6">Competition Format</h2>
+                <p class="text-xl text-gray-300">One round, unlimited creativity!</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-6"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div data-aos="fade-up" data-aos-delay="100" class="bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-12 rounded-3xl text-center">
+                    <div class="text-8xl mb-8">🎯</div>
+                    <h3 class="text-4xl font-bold mb-6 gradient-text">Single Round Competition</h3>
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                        Choose your favorite theme, create your most hilarious meme, and submit it for judging. 
+                        It's that simple! The best memes across all themes will be crowned winners.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-8 mt-12">
+                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl">
+                            <div class="text-4xl mb-4">📝</div>
+                            <h4 class="text-xl font-bold mb-2 text-purple-300">Step 1: Register</h4>
+                            <p class="text-gray-300">Fill the registration form and select your theme</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl">
+                            <div class="text-4xl mb-4">🎨</div>
+                            <h4 class="text-xl font-bold mb-2 text-blue-300">Step 2: Create</h4>
+                            <p class="text-gray-300">Design your meme based on chosen theme</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl">
+                            <div class="text-4xl mb-4">🚀</div>
+                            <h4 class="text-xl font-bold mb-2 text-green-300">Step 3: Submit</h4>
+                            <p class="text-gray-300">Upload your meme before the deadline</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 p-6 bg-yellow-600/20 rounded-2xl">
+                        <div class="flex items-center justify-center mb-4">
+                            <i class="fas fa-calendar-alt text-3xl text-yellow-400 mr-4"></i>
+                            <h4 class="text-2xl font-bold text-yellow-300">Submission Deadline</h4>
+                        </div>
+                        <p class="text-xl text-gray-300">July 30, 2024 - 11:59 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <div data-aos="fade-up" class="text-center mb-16">
+                <h2 class="text-5xl font-bold gradient-text mb-6">Register Now</h2>
+                <p class="text-xl text-gray-300">Join the meme revolution and showcase your creativity!</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-6"></div>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <div data-aos="fade-up" data-aos-delay="200" class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/20">
+                    <form class="space-y-6" id="registrationForm">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-purple-300 font-semibold mb-2">Full Name *</label>
+                                <input type="text" name="name" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" placeholder="Enter your name" required>
+                            </div>
+                            <div>
+                                <label class="block text-purple-300 font-semibold mb-2">Roll Number *</label>
+                                <input type="text" name="rollnumber" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" placeholder="Enter roll number" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-purple-300 font-semibold mb-2">Year *</label>
+                                <select name="year" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" required>
+                                    <option value="">Select Year</option>
+                                    <option value="2nd">2nd Year</option>
+                                    <option value="3rd">3rd Year</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-purple-300 font-semibold mb-2">Department *</label>
+                                <select name="dept" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" required>
+                                    <option value="">Select Department</option>
+                                    <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Electronics & Communication Engineering">Electronics & Communication Engineering</option>
+                                    <option value="Electrical & Electronics Engineering">Electrical & Electronics Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Civil Engineering">Civil Engineering</option>
+                                    <option value="AIML">AIML</option>
+                                    <option value="Chemical Engineering">Chemical Engineering</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-purple-300 font-semibold mb-2">Choose Your Meme Theme *</label>
+                            <select name="theme" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" required>
+                                <option value="">Select Theme</option>
+                                <option value="online-vs-offline">💻 Online vs Offline Classes</option>
+                                <option value="chatgpt-life">🤖 ChatGPT Life</option>
+                                <option value="instagram-vs-reality">📱 Instagram vs Reality</option>
+                                <option value="toxic-friendships">😈 Toxic Friendships</option>
+                                <option value="tanglish-messages">💬 Tanglish Messages</option>
+                                <option value="brain-during-exams">🧠 Brain During Exams</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-purple-300 font-semibold mb-2">Email Address *</label>
+                            <input type="email" name="email" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-purple-300 font-semibold mb-2">Phone Number *</label>
+                            <input type="tel" name="phone" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" placeholder="Enter phone number" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-purple-300 font-semibold mb-2">Upload Your Meme *</label>
+                            <input type="file" name="meme_file" accept="image/*" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700" required>
+                            <p class="text-gray-400 text-sm mt-2">Accepted formats: JPG, PNG, GIF (Max size: 5MB)</p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-12 py-4 rounded-full text-lg font-bold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 neon-glow">
+                                Register for Memeverse 3.0 🚀
+                            </button>
+                        </div>
+                        
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div data-aos="fade-up" class="text-center mb-16">
+                <h2 class="text-5xl font-bold gradient-text mb-6">Gallery</h2>
+                <p class="text-xl text-gray-300">Coming soon - Epic memes and event highlights!</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-6"></div>
+            </div>
+            
+            <div data-aos="fade-up" data-aos-delay="200" class="text-center">
+                <div class="bg-gray-800/50 backdrop-blur-sm p-16 rounded-2xl border border-purple-500/20">
+                    <div class="text-8xl mb-8">🎨</div>
+                    <h3 class="text-3xl font-bold mb-4 text-purple-300">Gallery Coming Soon!</h3>
+                    <p class="text-xl text-gray-300 mb-8">
+                        This space will be filled with the most hilarious and creative memes from our competition!
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+                        <div class="bg-purple-600/20 p-6 rounded-xl">
+                            <div class="text-3xl mb-2">😂</div>
+                            <p class="text-sm">Winning Memes</p>
+                        </div>
+                        <div class="bg-blue-600/20 p-6 rounded-xl">
+                            <div class="text-3xl mb-2">📸</div>
+                            <p class="text-sm">Event Photos</p>
+                        </div>
+                        <div class="bg-green-600/20 p-6 rounded-xl">
+                            <div class="text-3xl mb-2">🏆</div>
+                            <p class="text-sm">Award Ceremony</p>
+                        </div>
+                        <div class="bg-pink-600/20 p-6 rounded-xl">
+                            <div class="text-3xl mb-2">🎉</div>
+                            <p class="text-sm">Highlights</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-purple-500/20 py-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="text-4xl font-bold gradient-text mb-2">Memeverse 3.0</div>
+                <p class="text-gray-400">Where Memes Speak Louder Than Words</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mascot bounce animation
+        function bounceMascot() {
+            const mascot = document.querySelector('.mascot');
+            mascot.classList.add('bounce');
+            setTimeout(() => {
+                mascot.classList.remove('bounce');
+            }, 500);
+        }
+
+        // Initialize Supabase
+        const supabaseUrl = 'https://qdyetknifporssjravoi.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFkeWV0a25pZnBvcnNzanJhdm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM0NTM4NDYsImV4cCI6MjA2OTAyOTg0Nn0.WYl6hqJlrUSJO67rQc56a_bXWfdLs-5OVK_Ll7i-v_s';
+        const { createClient } = supabase;
+        const supabaseClient = createClient(supabaseUrl, supabaseKey);
+
+        // Form submission handler with Supabase integration
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Uploading...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Collect form data
+                const formData = new FormData(this);
+                
+                // Get the meme file
+                const memeFile = formData.get('meme_file');
+                if (!memeFile || memeFile.size === 0) {
+                    throw new Error('Please select a meme file to upload');
+                }
+                
+                // Create unique filename
+                const fileName = `${formData.get('rollnumber')}_${Date.now()}_${memeFile.name}`;
+                
+                // Upload file to Supabase Storage
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Uploading meme...';
+                const { data: storageData, error: storageError } = await supabaseClient.storage
+                    .from('memes')
+                    .upload(fileName, memeFile, { upsert: false });
+                
+                if (storageError) {
+                    throw new Error('File upload failed: ' + storageError.message);
+                }
+                
+                // Get public URL for the uploaded file
+                const { data: publicUrlData } = supabaseClient.storage
+                    .from('memes')
+                    .getPublicUrl(fileName);
+                
+                // Prepare registration data
+                const registrationData = {
+                    name: formData.get('name'),
+                    rollnumber: formData.get('rollnumber'),
+                    dept: formData.get('dept'),
+                    year: formData.get('year'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    meme_file_name: fileName,
+                    meme_file_url: publicUrlData.publicUrl
+                };
+                
+                // Insert into Supabase table
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Saving registration...';
+                const { data: insertData, error: insertError } = await supabaseClient
+                    .from('registrations')
+                    .insert([registrationData])
+                    .select();
+                
+                if (insertError) {
+                    throw new Error('Registration failed: ' + insertError.message);
+                }
+                
+                // Show success message
+                alert(`🎉 Registration Successful!\n\n✅ Data saved to database\n\nName: ${registrationData.name}\nRoll Number: ${registrationData.rollnumber}\nDepartment: ${registrationData.dept}\nYear: ${registrationData.year}\n\nYour meme has been uploaded and registration completed successfully!`);
+                
+                // Reset form
+                this.reset();
+                
+            } catch (error) {
+                console.error('Registration error:', error);
+                alert(`❌ Registration Failed\n\n${error.message}\n\nPlease try again or contact support if the problem persists.`);
+            } finally {
+                // Restore button state
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('#home');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Add scroll-triggered animations for theme cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, observerOptions);
+
+        // Observe theme cards
+        document.querySelectorAll('.theme-card').forEach(card => {
+            card.style.transform = 'translateY(50px)';
+            card.style.opacity = '0';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Add typing effect to hero tagline
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect when page loads
+        window.addEventListener('load', () => {
+            const tagline = document.querySelector('#home p');
+            if (tagline) {
+                const originalText = tagline.textContent;
+                setTimeout(() => {
+                    typeWriter(tagline, originalText, 50);
+                }, 1500);
+            }
+        });
+
+        // Add floating particles effect
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = 'rgba(102, 126, 234, 0.6)';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '1';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            
+            document.body.appendChild(particle);
+            
+            const animation = particle.animate([
+                { transform: 'translateY(0px)', opacity: 1 },
+                { transform: `translateY(-${window.innerHeight + 100}px)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'linear'
+            });
+            
+            animation.onfinish = () => particle.remove();
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 300);
+
+        // Add navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-gray-900');
+                nav.classList.remove('bg-gray-900/90');
+            } else {
+                nav.classList.remove('bg-gray-900');
+                nav.classList.add('bg-gray-900/90');
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <img src="https://imgs.search.brave.com/u4cNggCd8oj5xtMo6fSkgB758PkEYi7g8KssWKz5iwY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ha20t/aW1nLWEtaW4udG9z/c2h1Yi5jb20vc2l0/ZXMvcmVzb3VyY2Vz/L2NhbXB1cy9wcm9k/L2ltZy9sb2dvLzIw/MjMvOS9sb2dvMTI0/NzMwNzU3MDg5Ny5q/cGc" alt="APEC Logo" class="h-12 w-auto mr-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Adhiparasakthi Engineering College</h3>
+                            <p class="text-gray-400">Melmaruvathur-603319</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://www.facebook.com/adhiparasakthiengineeringcollege/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-500 transition-colors" aria-label="Facebook">
+                        <i class="fab fa-facebook-f text-2xl"></i>
+                    </a>
+                    <a href="https://x.com/apenggcollege" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Twitter">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="https://www.youtube.com/user/AdhiparasakthiIn" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-red-600 transition-colors" aria-label="YouTube">
+                        <i class="fab fa-youtube text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>© 2025 Adhiparasakthi Engineering College. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'964aef5c93da8019',t:'MTc1MzQzODkzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>
