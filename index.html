@@ -131,13 +131,13 @@
     <nav class="fixed top-0 w-full bg-gray-900/90 backdrop-blur-sm z-50 border-b border-purple-500/20">
         <div class="container mx-auto px-6 py-3">
             <!-- Top Row -->
-            <div class="flex justify-between items-center mb-2">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-2 space-y-2 md:space-y-0">
                 <!-- Left - College Info -->
                 <div class="flex items-center">
-                    <img src="https://imgs.search.brave.com/u4cNggCd8oj5xtMo6fSkgB758PkEYi7g8KssWKz5iwY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ha20t/aW1nLWEtaW4udG9z/c2h1Yi5jb20vc2l0/ZXMvcmVzb3VyY2Vz/L2NhbXB1cy9wcm9k/L2ltZy9sb2dvLzIw/MjMvOS9sb2dvMTI0/NzMwNzU3MDg5Ny5q/cGc" 
-                         alt="APEC Logo" 
-                         class="h-12 w-auto object-contain mr-3">
-                    <div class="text-left">
+                    <img src="https://imgs.search.brave.com/u4cNggCd8oj5xtMo6fSkgB758PkEYi7g8KssWKz5iwY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ha20t/aW1nLWEtaW4udG9z/c2h1Yi5jb20vc2l0/ZXMvcmVzb3VyY2Vz/L2NhbXB1cy9wcm9k/L2ltZy9sb2dvLzIw/MjMvOS9sb2dvMTI0/NzMwNzU3MDg5Ny5q/cGc"
+                         alt="APEC Logo"
+                         class="h-10 w-auto object-contain mr-2 sm:h-12">
+                    <div class="text-left min-w-0">
                         <div class="text-sm text-white font-medium">Adhiparasakthi Engineering College</div>
                         <div class="text-xs text-gray-400">Melmaruvathur-603319</div>
                         <div class="text-xs text-purple-300">Department of Computer Science and Engineering</div> 
@@ -145,42 +145,42 @@
                 </div>
 
                 <!-- Right - CSI Info -->
-                <div class="flex items-center space-x-3">
+                <div class="flex items-center space-x-2 sm:space-x-3">
                     <div class="text-right">
                         <p class="text-xs text-white">In association with</p>
                         <p class="text-xs font-medium text-blue-300">CSI Kancheepuram</p>
                     </div>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8AktAs8ohWJZqTUs7z0qBSLQ-CqdH2X5GBg&s" 
-                         alt="CSI Logo" 
-                         class="h-10 w-auto object-contain"
-                         style="min-width: 40px;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8AktAs8ohWJZqTUs7z0qBSLQ-CqdH2X5GBg&s"
+                         alt="CSI Logo"
+                         class="h-8 w-auto object-contain sm:h-10"
+                         style="min-width: 32px;">
                 </div>
             </div>
 
             <!-- Bottom Row - Centered Title -->
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center px-2 sm:px-0">
                 <div class="text-orange-400 text-sm font-medium tracking-wider mb-1">Organises</div>
-                <h1 class="text-3xl md:text-4xl font-bold text-center text-white bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
+                <h1 class="text-2xl xs:text-3xl md:text-4xl font-bold text-center text-white bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
                     MEMEVERSE 3.0
                 </h1>
             </div>
 
             <!-- Navigation Links -->
-            <div class="hidden md:flex justify-center space-x-8 mt-3">
+            <div class="hidden md:flex justify-center space-x-4 lg:space-x-8 mt-3">
                 <a href="#home" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Home</a>
                 <a href="#about" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">About</a>
                 <a href="#themes" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Themes</a>
                 <a href="#rules" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Rules</a>
                 <a href="#register" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Register</a>
             </div>
-            <button class="md:hidden text-white" onclick="toggleMenu()">
+            <button class="md:hidden text-white absolute top-4 right-4 sm:static sm:top-auto sm:right-auto" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
     
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed top-0 left-0 w-full h-full bg-gray-900/95 backdrop-blur-sm z-40 hidden">
+    <div id="mobileMenu" class="fixed top-0 left-0 w-full h-full bg-gray-900/95 backdrop-blur-sm z-40 hidden md:hidden flex-col">
         <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
             <a href="#home" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">Home</a>
             <a href="#about" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">About</a>
@@ -192,19 +192,19 @@
 
     <!-- Landing Page -->
     <section id="home" class="min-h-screen gradient-bg flex items-center justify-center relative pt-32 pb-16">
-        <div class="container mx-auto px-6 text-center">
+        <div class="container mx-auto px-3 sm:px-6 text-center">
             <div data-aos="fade-down" data-aos-duration="1000" class="pt-8">
-                <h1 class="text-6xl md:text-8xl font-bold mb-4 text-white">
+                <h1 class="text-4xl xs:text-5xl md:text-8xl font-bold mb-4 text-white leading-tight">
                     MEMEVERSE 3.0
                 </h1>
-                <p class="text-xl md:text-2xl mb-8 text-purple-100">
+                <p class="text-base xs:text-lg md:text-2xl mb-8 text-purple-100">
                     Where Memes Speak Louder Than Words
                 </p>
             </div>
             
             <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" class="mb-12">
-                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto">
-                    <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 xs:p-6 md:p-8 max-w-full md:max-w-2xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 text-center">
                         <div>
                             <i class="fas fa-calendar-alt text-3xl text-purple-300 mb-2"></i>
                             <p class="font-semibold">Competition Date</p>
@@ -504,7 +504,7 @@
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-purple-300 font-semibold mb-2">Year *</label>
-                                <select name="year" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" required>
+                                <select name="year" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:outline-none transition-colors text-sm xs:text-base" required>
                                     <option value="">Select Year</option>
                                     <option value="2nd">2nd Year</option>
                                     <option value="3rd">3rd Year</option>
@@ -512,7 +512,7 @@
                             </div>
                             <div>
                                 <label class="block text-purple-300 font-semibold mb-2">Department *</label>
-                                <select name="dept" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" required>
+                                <select name="dept" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:outline-none transition-colors text-sm xs:text-base" required>
                                     <option value="">Select Department</option>
                                     <option value="Computer Science & Engineering">Computer Science & Engineering</option>
                                     <option value="Information Technology">Information Technology</option>
@@ -528,7 +528,7 @@
                         
                         <div>
                             <label class="block text-purple-300 font-semibold mb-2">Choose Your Meme Theme *</label>
-                            <select name="theme" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" required>
+                            <select name="theme" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:outline-none transition-colors text-sm xs:text-base" required>
                                 <option value="">Select Theme</option>
                                 <option value="online-vs-offline">💻 Online vs Offline Classes</option>
                                 <option value="chatgpt-life">🤖 ChatGPT Life</option>
@@ -541,22 +541,22 @@
                         
                         <div>
                             <label class="block text-purple-300 font-semibold mb-2">Email Address *</label>
-                            <input type="email" name="email" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" placeholder="Enter your email" required>
+                            <input type="email" name="email" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:outline-none transition-colors text-sm xs:text-base" placeholder="Enter your email" required>
                         </div>
                         
                         <div>
                             <label class="block text-purple-300 font-semibold mb-2">Phone Number *</label>
-                            <input type="tel" name="phone" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" placeholder="Enter phone number" required>
+                            <input type="tel" name="phone" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:outline-none transition-colors text-sm xs:text-base" placeholder="Enter phone number" required>
                         </div>
                         
                         <div>
                             <label class="block text-purple-300 font-semibold mb-2">Upload Your Meme *</label>
-                            <input type="file" name="meme_file" accept="image/*" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700" required>
+                            <input type="file" name="meme_file" accept="image/*" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:outline-none transition-colors file:mr-2 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700" required>
                             <p class="text-gray-400 text-sm mt-2">Accepted formats: JPG, PNG, GIF (Max size: 5MB)</p>
                         </div>
                         
                         <div class="text-center">
-                            <button type="submit" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-12 py-4 rounded-full text-lg font-bold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 neon-glow">
+                            <button type="submit" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white w-full xs:w-auto px-6 py-3 rounded-full text-base xs:text-lg font-bold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 neon-glow active:scale-95">
                                 Register for Memeverse 3.0 🚀
                             </button>
                         </div>
