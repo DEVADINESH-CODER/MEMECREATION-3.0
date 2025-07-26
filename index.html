@@ -165,7 +165,57 @@
     <div class="floating-emoji" style="left:60vw;top:70vh;">😈</div>
     <div class="floating-emoji" style="left:50vw;top:35vh;">🧠</div>
     <!-- Floating Mascot -->
-    <div class="mascot floating-animation" onclick="bounceMascot()">🤖</div>
+    <div class="mascot floating-animation" onclick="toggleChatbot()">🤖</div>
+    
+    <!-- Chatbot Interface -->
+    <div id="chatbot" class="fixed bottom-20 right-4 w-80 max-w-[90vw] bg-gray-900/95 backdrop-blur-sm border border-purple-500/30 rounded-2xl shadow-2xl z-50 hidden">
+        <!-- Chatbot Header -->
+        <div class="bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-t-2xl flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="text-2xl">🤖</div>
+                <div>
+                    <h3 class="text-white font-bold text-sm">Memeverse Assistant</h3>
+                    <p class="text-purple-100 text-xs">Ask me anything!</p>
+                </div>
+            </div>
+            <button onclick="toggleChatbot()" class="text-white hover:text-gray-300 text-xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Chat Messages -->
+        <div id="chatMessages" class="h-64 overflow-y-auto p-4 space-y-3">
+            <div class="flex items-start space-x-2">
+                <div class="text-lg">🤖</div>
+                <div class="bg-purple-600/20 p-3 rounded-lg max-w-xs">
+                    <p class="text-white text-sm">Hi! I'm your Memeverse 3.0 assistant. Ask me about registration, eligibility, themes, or anything else!</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Questions -->
+        <div class="p-3 border-t border-gray-700">
+            <p class="text-gray-400 text-xs mb-2">Quick questions:</p>
+            <div class="flex flex-wrap gap-1">
+                <button onclick="askQuestion('How to register?')" class="bg-purple-600/30 text-purple-200 px-2 py-1 rounded text-xs hover:bg-purple-600/50 transition-colors">How to register?</button>
+                <button onclick="askQuestion('What is eligibility?')" class="bg-blue-600/30 text-blue-200 px-2 py-1 rounded text-xs hover:bg-blue-600/50 transition-colors">Eligibility?</button>
+                <button onclick="askQuestion('What are themes?')" class="bg-green-600/30 text-green-200 px-2 py-1 rounded text-xs hover:bg-green-600/50 transition-colors">Themes?</button>
+                <button onclick="askQuestion('Competition rounds?')" class="bg-yellow-600/30 text-yellow-200 px-2 py-1 rounded text-xs hover:bg-yellow-600/50 transition-colors">Rounds?</button>
+                <button onclick="askQuestion('What are prizes?')" class="bg-orange-600/30 text-orange-200 px-2 py-1 rounded text-xs hover:bg-orange-600/50 transition-colors">Prizes?</button>
+                <button onclick="askQuestion('Rules?')" class="bg-red-600/30 text-red-200 px-2 py-1 rounded text-xs hover:bg-red-600/50 transition-colors">Rules?</button>
+            </div>
+        </div>
+        
+        <!-- Chat Input -->
+        <div class="p-3 border-t border-gray-700">
+            <div class="flex space-x-2">
+                <input type="text" id="chatInput" placeholder="Type your question..." class="flex-1 bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white text-sm focus:border-purple-500 focus:outline-none" onkeypress="handleChatKeyPress(event)">
+                <button onclick="sendMessage()" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-2 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-colors">
+                    <i class="fas fa-paper-plane text-sm"></i>
+                </button>
+            </div>
+        </div>
+    </div>
     
     <!-- Navigation -->
     <nav id="navbar" class="fixed top-0 w-full bg-gray-900/90 backdrop-blur-sm z-50 border-b border-purple-500/20 transition-all duration-300">
@@ -218,12 +268,29 @@
                     MEMEVERSE 3.0
                 </h1>
                 <!-- Navigation Links -->
-                <div class="flex justify-center items-center space-x-4 lg:space-x-6">
+                <div class="hidden md:flex justify-center items-center space-x-4 lg:space-x-6">
                     <a href="#home" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Home</a>
                     <a href="#about" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">About</a>
                     <a href="#themes" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Themes</a>
                     <a href="#rules" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Rules</a>
+                    <a href="#prizes" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Prizes</a>
                     <a href="#register" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Register</a>
+                </div>
+                
+                <!-- Mobile Navigation Links (2 rows) -->
+                <div class="md:hidden flex flex-col items-center space-y-2">
+                    <!-- First row: 4 links -->
+                    <div class="flex justify-center items-center space-x-3">
+                        <a href="#home" class="hover:text-purple-400 transition-colors font-medium text-xs uppercase tracking-wider">Home</a>
+                        <a href="#about" class="hover:text-purple-400 transition-colors font-medium text-xs uppercase tracking-wider">About</a>
+                        <a href="#themes" class="hover:text-purple-400 transition-colors font-medium text-xs uppercase tracking-wider">Themes</a>
+                        <a href="#rules" class="hover:text-purple-400 transition-colors font-medium text-xs uppercase tracking-wider">Rules</a>
+                    </div>
+                    <!-- Second row: 2 links -->
+                    <div class="flex justify-center items-center space-x-6">
+                        <a href="#prizes" class="hover:text-purple-400 transition-colors font-medium text-xs uppercase tracking-wider">Prizes</a>
+                        <a href="#register" class="hover:text-purple-400 transition-colors font-medium text-xs uppercase tracking-wider">Register</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -241,6 +308,7 @@
             <a href="#about" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">About</a>
             <a href="#themes" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">Themes</a>
             <a href="#rules" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">Rules</a>
+            <a href="#prizes" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">Prizes</a>
             <a href="#register" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">Register</a>
         </div>
     </div>
@@ -547,6 +615,233 @@
         </div>
     </section>
 
+    <!-- Prizes Section -->
+    <section id="prizes" class="py-20 bg-gradient-to-br from-purple-900/30 to-blue-900/30">
+        <div class="container mx-auto px-6">
+            <div data-aos="fade-up" class="text-center mb-16">
+                <h2 class="text-2xl xs:text-4xl md:text-5xl font-bold gradient-text mb-4 xs:mb-6">🏆 Amazing Prizes</h2>
+                <p class="text-base xs:text-xl text-gray-300">Win premium design tools and unleash your creative potential!</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-6"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+                <!-- First Prize -->
+                <div data-aos="fade-up" data-aos-delay="100" class="relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                        <div class="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                            🥇 FIRST PRIZE
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-yellow-500/20 to-orange-500/20 p-6 rounded-2xl border-2 border-yellow-400/50 hover:border-yellow-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl mt-6">
+                        <div class="text-center mb-6">
+                            <div class="text-6xl mb-4">👑</div>
+                            <h3 class="text-2xl font-bold text-yellow-300 mb-2">Ultimate Creative Bundle</h3>
+                            <p class="text-yellow-200 font-semibold">Figma Pro + Canva Pro</p>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-black/30 p-4 rounded-xl">
+                                <h4 class="font-bold text-purple-300 mb-3 flex items-center">
+                                    <i class="fab fa-figma mr-2"></i> Figma Pro Benefits
+                                </h4>
+                                <ul class="text-sm text-gray-300 space-y-1">
+                                    <li>• Unlimited personal files</li>
+                                    <li>• Version history (30 days)</li>
+                                    <li>• Advanced prototyping</li>
+                                    <li>• Private projects</li>
+                                    <li>• Audio conversations</li>
+                                    <li>• Advanced design systems</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-black/30 p-4 rounded-xl">
+                                <h4 class="font-bold text-blue-300 mb-3 flex items-center">
+                                    <i class="fas fa-palette mr-2"></i> Canva Pro Benefits
+                                </h4>
+                                <ul class="text-sm text-gray-300 space-y-1">
+                                    <li>• 100M+ premium stock photos</li>
+                                    <li>• Remove backgrounds instantly</li>
+                                    <li>• Magic Resize for all formats</li>
+                                    <li>• Brand Kit & templates</li>
+                                    <li>• Premium animations & effects</li>
+                                    <li>• Unlimited storage (1TB)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-6">
+                            <div class="text-2xl font-bold text-yellow-300">Worth ₹4,000+</div>
+                            <p class="text-yellow-200 text-sm">1 Year Subscription Each</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Second Prize -->
+                <div data-aos="fade-up" data-aos-delay="200" class="relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                        <div class="bg-gradient-to-r from-gray-300 to-gray-500 text-black px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                            🥈 SECOND PRIZE
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-gray-400/20 to-purple-500/20 p-6 rounded-2xl border-2 border-gray-400/50 hover:border-gray-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl mt-6">
+                        <div class="text-center mb-6">
+                            <div class="text-6xl mb-4">🎨</div>
+                            <h3 class="text-2xl font-bold text-gray-300 mb-2">Design Pro Access</h3>
+                            <p class="text-gray-200 font-semibold">Figma Pro Subscription</p>
+                        </div>
+                        
+                        <div class="bg-black/30 p-4 rounded-xl mb-4">
+                            <h4 class="font-bold text-purple-300 mb-3 flex items-center">
+                                <i class="fab fa-figma mr-2"></i> Figma Pro Features
+                            </h4>
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Unlimited personal files & projects</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>30-day version history</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Advanced prototyping & interactions</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Private projects & team libraries</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Audio conversations in files</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Advanced design systems</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Professional design workflows</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-gray-300">Worth ₹2,000+</div>
+                            <p class="text-gray-200 text-sm">1 Year Subscription</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Third Prize -->
+                <div data-aos="fade-up" data-aos-delay="300" class="relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                        <div class="bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                            🥉 THIRD PRIZE
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-500/20 to-red-500/20 p-6 rounded-2xl border-2 border-orange-400/50 hover:border-orange-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl mt-6">
+                        <div class="text-center mb-6">
+                            <div class="text-6xl mb-4">🎭</div>
+                            <h3 class="text-2xl font-bold text-orange-300 mb-2">Creative Power</h3>
+                            <p class="text-orange-200 font-semibold">Canva Pro Subscription</p>
+                        </div>
+                        
+                        <div class="bg-black/30 p-4 rounded-xl mb-4">
+                            <h4 class="font-bold text-blue-300 mb-3 flex items-center">
+                                <i class="fas fa-palette mr-2"></i> Canva Pro Features
+                            </h4>
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>100M+ premium stock photos & videos</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Background remover (1-click)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Magic Resize for all social formats</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Brand Kit & custom templates</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Premium animations & effects</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>1TB cloud storage</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Priority customer support</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-orange-300">Worth ₹2,000+</div>
+                            <p class="text-orange-200 text-sm">1 Year Subscription</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Benefits -->
+            <div data-aos="fade-up" data-aos-delay="400" class="mt-12 max-w-4xl mx-auto">
+                <div class="bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-6 md:p-8 rounded-2xl border border-purple-500/30">
+                    <h3 class="text-2xl font-bold text-center text-purple-300 mb-6">🎁 Additional Benefits for All Winners</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <div class="flex items-center text-green-300">
+                                <i class="fas fa-certificate mr-3 text-yellow-400"></i>
+                                <span>Digital Certificate of Achievement</span>
+                            </div>
+                            <div class="flex items-center text-green-300">
+                                <i class="fas fa-trophy mr-3 text-yellow-400"></i>
+                                <span>Winner Badge for LinkedIn Profile</span>
+                            </div>
+                            <div class="flex items-center text-green-300">
+                                <i class="fas fa-star mr-3 text-yellow-400"></i>
+                                <span>Featured in College Social Media</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center text-green-300">
+                                <i class="fas fa-users mr-3 text-yellow-400"></i>
+                                <span>Access to Design Community</span>
+                            </div>
+                            <div class="flex items-center text-green-300">
+                                <i class="fas fa-graduation-cap mr-3 text-yellow-400"></i>
+                                <span>Portfolio Building Guidance</span>
+                            </div>
+                            <div class="flex items-center text-green-300">
+                                <i class="fas fa-handshake mr-3 text-yellow-400"></i>
+                                <span>Networking Opportunities</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Call to Action -->
+            <div data-aos="fade-up" data-aos-delay="500" class="text-center mt-12">
+                <div class="bg-gray-900/50 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-gray-600/30 max-w-2xl mx-auto">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="text-2xl font-bold text-yellow-300 mb-4">Ready to Win These Amazing Prizes?</h3>
+                    <p class="text-gray-300 mb-6">Register now and create the meme that could win you premium design tools worth thousands!</p>
+                    <a href="#register" class="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-bold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 neon-glow">
+                        Register Now & Win! 🎯
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Registration Section -->
     <section id="register" class="py-20 bg-gray-800">
         <div class="container mx-auto px-6">
@@ -722,6 +1017,119 @@
             setTimeout(() => {
                 mascot.classList.remove('bounce');
             }, 500);
+        }
+        
+        // Chatbot functionality
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbot');
+            chatbot.classList.toggle('hidden');
+            
+            // Focus input when opening
+            if (!chatbot.classList.contains('hidden')) {
+                setTimeout(() => {
+                    document.getElementById('chatInput').focus();
+                }, 100);
+            }
+        }
+        
+        // Chatbot knowledge base
+        const chatbotResponses = {
+            'how to register': 'To register for Memeverse 3.0:\n\n1. Fill out the registration form\n2. Select your meme theme\n3. Upload your meme (JPG, PNG, GIF)\n4. Submit before July 29, 2024\n\nClick the "Register Now" button to get started! 🚀',
+            'registration': 'To register for Memeverse 3.0:\n\n1. Fill out the registration form\n2. Select your meme theme\n3. Upload your meme (JPG, PNG, GIF)\n4. Submit before July 29, 2024\n\nClick the "Register Now" button to get started! 🚀',
+            'eligibility': 'Eligibility for Memeverse 3.0:\n\n✅ 2nd and 3rd year students only\n✅ All engineering departments welcome\n✅ Individual participation\n✅ Must be from any engineering college\n\nReady to showcase your creativity? 🎨',
+            'what is eligibility': 'Eligibility for Memeverse 3.0:\n\n✅ 2nd and 3rd year students only\n✅ All engineering departments welcome\n✅ Individual participation\n✅ Must be from any engineering college\n\nReady to showcase your creativity? 🎨',
+            'themes': 'Memeverse 3.0 has 6 exciting themes:\n\n💻 Online vs Offline Classes\n🤖 ChatGPT Life\n📱 Instagram vs Reality\n😈 Toxic Friendships\n💬 Tanglish Messages\n🧠 Brain During Exams\n\nChoose your favorite and create the perfect meme! 🎯',
+            'what are themes': 'Memeverse 3.0 has 6 exciting themes:\n\n💻 Online vs Offline Classes\n🤖 ChatGPT Life\n📱 Instagram vs Reality\n😈 Toxic Friendships\n💬 Tanglish Messages\n🧠 Brain During Exams\n\nChoose your favorite and create the perfect meme! 🎯',
+            'rounds': 'Competition Rounds Details:\n\n🎯 ROUND 1 - Submission Phase:\n• Submit your meme based on chosen theme\n• Deadline: July 29, 2024 (11:59 PM)\n• All registered participants compete\n• Judged on creativity, humor & theme adherence\n\n🏆 ROUND 2 - Final Battle:\n• Best memes from Round 1 selected\n• Final competition on July 31, 2024\n• Top winners announced\n• Prizes distributed\n\nBring your A-game for both rounds! 💪',
+            'competition rounds': 'Competition Rounds Details:\n\n🎯 ROUND 1 - Submission Phase:\n• Submit your meme based on chosen theme\n• Deadline: July 29, 2024 (11:59 PM)\n• All registered participants compete\n• Judged on creativity, humor & theme adherence\n\n🏆 ROUND 2 - Final Battle:\n• Best memes from Round 1 selected\n• Final competition on July 31, 2024\n• Top winners announced\n• Prizes distributed\n\nBring your A-game for both rounds! 💪',
+            'round 1': 'ROUND 1 - Submission Phase:\n\n📝 What to do:\n• Create your meme based on chosen theme\n• Upload through registration form\n• Submit before July 29, 2024 (11:59 PM)\n\n🎯 Judging Criteria:\n• Creativity & Originality (40%)\n• Humor & Relatability (40%)\n• Theme Adherence (20%)\n\n✅ Requirements:\n• JPG, PNG, or GIF format\n• Max 5MB file size\n• Original content only\n\nGood luck! 🍀',
+            'round 2': 'ROUND 2 - Final Battle:\n\n🏆 What happens:\n• Best memes from Round 1 shortlisted\n• Final judging on July 31, 2024\n• Live announcement at APEC Campus\n• Winners receive prizes & certificates\n\n🎉 Event Schedule:\n• Venue: APEC Campus\n• Date: July 31, 2024\n• Time: TBA\n\n🥇 What you get:\n• Recognition certificates\n• Exciting prizes\n• Gallery feature\n• Ultimate memer status!\n\nSee you at the finals! 🚀',
+            'rules': 'Complete Competition Rules:\n\n👥 ELIGIBILITY:\n• 2nd & 3rd year students only\n• All engineering departments\n• Individual participation\n• One entry per participant\n\n📱 CONTENT RULES:\n• Original content only\n• No offensive/inappropriate content\n• Must relate to chosen theme\n• Accepted formats: JPG, PNG, GIF\n• Max file size: 5MB\n\n⏰ SUBMISSION:\n• Submit before July 29, 2024 (11:59 PM)\n• Upload through registration form\n• Include all required details\n\n🏆 JUDGING:\n• Creativity & originality\n• Humor & relatability\n• Theme adherence\n\nPlay fair and have fun! 🎮',
+            'deadline': 'Important deadlines:\n\n📅 Registration & Submission: July 29, 2024 (11:59 PM)\n🏆 Competition Date: July 31, 2024\n📍 Venue: APEC Campus\n\nDon\'t miss out! Register now! ⏰',
+            'when': 'Important deadlines:\n\n📅 Registration & Submission: July 29, 2024 (11:59 PM)\n🏆 Competition Date: July 31, 2024\n📍 Venue: APEC Campus\n\nDon\'t miss out! Register now! ⏰',
+            'prizes': '🏆 AMAZING PRIZES AWAIT! 🏆\n\n🥇 FIRST PRIZE - Ultimate Creative Bundle (Worth ₹4,000+):\n• Figma Pro (1 Year) - Advanced design & prototyping\n• Canva Pro (1 Year) - 100M+ premium assets\n• Unlimited files, premium templates & effects\n\n🥈 SECOND PRIZE - Design Pro Access (Worth ₹2,000+):\n• Figma Pro (1 Year Subscription)\n• Advanced prototyping & design systems\n• Professional workflows & team libraries\n\n🥉 THIRD PRIZE - Creative Power (Worth ₹2,000+):\n• Canva Pro (1 Year Subscription)\n• Background remover & Magic Resize\n• Premium animations & 1TB storage\n\n🎁 ALL WINNERS GET:\n• Digital certificates\n• LinkedIn winner badges\n• Portfolio building guidance\n• Design community access\n\nTotal prize value: ₹8,000+! 💰',
+            'what are prizes': '🏆 AMAZING PRIZES AWAIT! 🏆\n\n🥇 FIRST PRIZE - Ultimate Creative Bundle (Worth ₹4,000+):\n• Figma Pro (1 Year) - Advanced design & prototyping\n• Canva Pro (1 Year) - 100M+ premium assets\n• Unlimited files, premium templates & effects\n\n🥈 SECOND PRIZE - Design Pro Access (Worth ₹2,000+):\n• Figma Pro (1 Year Subscription)\n• Advanced prototyping & design systems\n• Professional workflows & team libraries\n\n🥉 THIRD PRIZE - Creative Power (Worth ₹2,000+):\n• Canva Pro (1 Year Subscription)\n• Background remover & Magic Resize\n• Premium animations & 1TB storage\n\n🎁 ALL WINNERS GET:\n• Digital certificates\n• LinkedIn winner badges\n• Portfolio building guidance\n• Design community access\n\nTotal prize value: ₹8,000+! 💰',
+            'figma pro': '🎨 FIGMA PRO BENEFITS:\n\n✨ DESIGN FEATURES:\n• Unlimited personal files & projects\n• 30-day version history\n• Advanced prototyping & interactions\n• Private projects & team libraries\n• Audio conversations in files\n• Advanced design systems\n• Professional workflows\n\n💡 WHY FIGMA PRO?\n• Industry-standard design tool\n• Used by top companies worldwide\n• Perfect for UI/UX design\n• Collaborative design features\n• Advanced component systems\n\n💰 Value: ₹2,000+ per year\n\nWin this premium tool and level up your design game! 🚀',
+            'canva pro': '🎭 CANVA PRO BENEFITS:\n\n🌟 PREMIUM FEATURES:\n• 100M+ premium stock photos & videos\n• Background remover (1-click magic!)\n• Magic Resize for all social formats\n• Brand Kit & custom templates\n• Premium animations & effects\n• 1TB cloud storage\n• Priority customer support\n\n💡 WHY CANVA PRO?\n• Perfect for social media content\n• Professional marketing materials\n• Easy-to-use interface\n• Thousands of premium templates\n• Advanced editing tools\n\n💰 Value: ₹2,000+ per year\n\nCreate stunning visuals effortlessly! ✨',
+            'judging': 'Judging Criteria:\n\n🎨 CREATIVITY & ORIGINALITY (40%):\n• Unique concept and execution\n• Original content creation\n• Innovative use of meme format\n\n😂 HUMOR & RELATABILITY (40%):\n• How funny is the meme?\n• Does it resonate with students?\n• Perfect timing and context\n\n🎯 THEME ADHERENCE (20%):\n• Does it fit the chosen theme?\n• Clear connection to theme\n• Creative interpretation\n\n👨‍⚖️ Our expert judges will evaluate all entries fairly! 🏆',
+            'format': 'Memeverse 3.0 Format:\n\n🎯 Two Round Competition\n\n📝 Round 1: Submit your meme based on chosen theme\n🏆 Round 2: Best memes compete for top prizes\n\nGive your best in both rounds for maximum impact! 💪',
+            'venue': 'Event Details:\n\n📍 Venue: APEC Campus\n🏢 Adhiparasakthi Engineering College\n📧 Organized by: Department of Computer Science and Engineering\n🤝 In association with: Computer Society of India, Kancheepuram Chapter\n\nSee you there! 🎉',
+            'file requirements': 'File Requirements:\n\n📱 ACCEPTED FORMATS:\n• JPG (JPEG)\n• PNG\n• GIF (animated allowed)\n\n💾 SIZE LIMITS:\n• Maximum file size: 5MB\n• Recommended resolution: 1080x1080 or higher\n\n✅ QUALITY TIPS:\n• High resolution preferred\n• Clear text and images\n• Good contrast and readability\n\n🚫 NOT ALLOWED:\n• Video files (MP4, AVI, etc.)\n• Documents (PDF, DOC, etc.)\n• Corrupted or damaged files\n\nMake sure your meme is crystal clear! 📸',
+            'departments': 'All Engineering Departments Welcome! 🎓\n\n✅ ELIGIBLE DEPARTMENTS:\n• Computer Science & Engineering\n• Information Technology\n• Electronics & Communication\n• Electrical & Electronics\n• Mechanical Engineering\n• Civil Engineering\n• AIML (AI & Machine Learning)\n• Chemical Engineering\n• And ALL other engineering branches!\n\n🌟 This is truly an inter-departmental competition where creativity knows no boundaries!\n\nWhich department will produce the ultimate memer? 🏆',
+            'contact': 'Need help? Contact us:\n\n🏢 Adhiparasakthi Engineering College\n📍 Melmaruvathur-603319\n💻 Department of Computer Science and Engineering\n\nFor technical support, please reach out to the organizing committee! 📞',
+            'help': 'I can help you with:\n\n❓ How to register\n✅ Eligibility criteria\n🎨 Meme themes\n📅 Important dates\n🏆 Competition rounds\n📍 Venue details\n🎁 Prizes information (Figma Pro, Canva Pro)\n📋 Rules and guidelines\n⚖️ Judging criteria\n📱 File requirements\n🎓 Department info\n\nSpecific prize queries:\n💎 "Figma Pro" - Learn about Figma Pro benefits\n🎨 "Canva Pro" - Discover Canva Pro features\n🏆 "What are prizes?" - Complete prize breakdown\n\nJust ask me anything! 😊'
+        };
+        
+        function askQuestion(question) {
+            document.getElementById('chatInput').value = question;
+            sendMessage();
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            
+            // Clear input
+            input.value = '';
+            
+            // Generate bot response
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addMessage(response, 'bot');
+            }, 500);
+        }
+        
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Check for keywords in the message
+            for (const [key, response] of Object.entries(chatbotResponses)) {
+                if (lowerMessage.includes(key)) {
+                    return response;
+                }
+            }
+            
+            // Default response for unrecognized queries
+            return 'Sorry, I didn\'t understand that question. Please try asking about:\n\n• How to register & registration process\n• Eligibility criteria & departments\n• Meme themes (6 available)\n• Competition rounds (Round 1 & 2)\n• Rules & guidelines\n• Judging criteria\n• File requirements\n• Important dates & deadlines\n• Venue & event details\n• Prizes & certificates\n\nOr click on the quick question buttons below! 😊';
+        }
+        
+        function addMessage(message, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                messageDiv.innerHTML = `
+                    <div class="flex items-start space-x-2 justify-end">
+                        <div class="bg-blue-600 p-3 rounded-lg max-w-xs">
+                            <p class="text-white text-sm">${message}</p>
+                        </div>
+                        <div class="text-lg">👤</div>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="flex items-start space-x-2">
+                        <div class="text-lg">🤖</div>
+                        <div class="bg-purple-600/20 p-3 rounded-lg max-w-xs">
+                            <p class="text-white text-sm whitespace-pre-line">${message}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
         }
 
         // Navbar scroll behavior
