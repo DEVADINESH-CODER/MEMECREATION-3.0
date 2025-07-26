@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="overflow-x-hidden w-full max-w-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -157,7 +157,7 @@
 }
 </style>
 </head>
-<body class="bg-gray-900 text-white overflow-x-hidden">
+<body class="bg-gray-900 text-white font-sans overflow-x-hidden w-full max-w-full">
     <!-- Floating Meme Emojis Background -->
     <div class="floating-emoji" style="left:10vw;top:12vh;">😂</div>
     <div class="floating-emoji" style="left:80vw;top:18vh;">🤖</div>
@@ -168,59 +168,74 @@
     <div class="mascot floating-animation" onclick="bounceMascot()">🤖</div>
     
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-gray-900/90 backdrop-blur-sm z-50 border-b border-purple-500/20">
-        <div class="container mx-auto px-6 py-3">
-            <!-- Top Row -->
-            <div class="flex flex-col md:flex-row justify-between items-center mb-2 space-y-2 md:space-y-0">
-                <!-- Left - College Info -->
-                <div class="flex items-center">
+    <nav id="navbar" class="fixed top-0 w-full bg-gray-900/90 backdrop-blur-sm z-50 border-b border-purple-500/20 transition-all duration-300">
+        <!-- Full Header (visible when at top) -->
+        <div id="fullHeader" class="w-full max-w-full px-3 sm:px-6 py-4 flex flex-col items-center overflow-x-hidden transition-all duration-300">
+            <!-- Main Navigation Layout -->
+            <div class="w-full flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
+                
+                <!-- Left - College Logo (Bigger) -->
+                <div class="flex justify-center md:justify-start">
                     <img src="https://imgs.search.brave.com/u4cNggCd8oj5xtMo6fSkgB758PkEYi7g8KssWKz5iwY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ha20t/aW1nLWEtaW4udG9z/c2h1Yi5jb20vc2l0/ZXMvcmVzb3VyY2Vz/L2NhbXB1cy9wcm9k/L2ltZy9sb2dvLzIw/MjMvOS9sb2dvMTI0/NzMwNzU3MDg5Ny5q/cGc"
                          alt="APEC Logo"
-                         class="h-10 w-auto object-contain mr-2 sm:h-12">
-                    <div class="text-left min-w-0">
-                        <div class="text-sm text-white font-medium">Adhiparasakthi Engineering College</div>
-                        <div class="text-xs text-gray-400">Melmaruvathur-603319</div>
-                        <div class="text-xs text-purple-300">Department of Computer Science and Engineering</div> 
-                    </div>
+                         class="h-16 w-auto object-contain md:h-20">
                 </div>
 
-                <!-- Right - CSI Info -->
-                <div class="flex items-center space-x-2 sm:space-x-3">
-                    <div class="text-right">
-                        <p class="text-xs text-white">In association with</p>
-                        <p class="text-xs font-medium text-blue-300">CSI Kancheepuram</p>
+                <!-- Center - College Info -->
+                <div class="flex-1 text-center">
+                    <div class="text-lg md:text-xl text-white font-bold">Adhiparasakthi Engineering College</div>
+                    <div class="text-sm text-gray-400">Melmaruvathur-603319</div>
+                    <div class="text-sm text-purple-300">Department of Computer Science and Engineering</div>
+                </div>
+
+                <!-- Right - CSI Info (Bigger Logo) -->
+                <div class="flex flex-col items-center md:items-end space-y-2">
+                    <div class="text-center md:text-right">
+                        <p class="text-sm text-white font-medium">In association with</p>
+                        <p class="text-sm font-bold text-blue-300">Computer Society of India</p>
+                        <p class="text-xs text-blue-200">Kancheepuram Chapter</p>
                     </div>
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8AktAs8ohWJZqTUs7z0qBSLQ-CqdH2X5GBg&s"
                          alt="CSI Logo"
-                         class="h-8 w-auto object-contain sm:h-10"
-                         style="min-width: 32px;">
+                         class="h-12 w-auto object-contain md:h-16">
                 </div>
             </div>
 
-            <!-- Bottom Row - Centered Title -->
-            <div class="flex flex-col items-center px-2 sm:px-0">
-                <div class="text-orange-400 text-sm font-medium tracking-wider mb-1">Organises</div>
-                <h1 class="text-2xl xs:text-3xl md:text-4xl font-bold text-center text-white bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
+            <!-- Organises Section -->
+            <div class="mt-6 text-center">
+                <div class="text-orange-400 text-lg font-bold tracking-wider mb-2">Organises</div>
+                <h1 class="text-3xl xs:text-4xl md:text-5xl font-bold text-center text-white bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
                     MEMEVERSE 3.0
                 </h1>
             </div>
-
-            <!-- Navigation Links -->
-            <div class="hidden md:flex justify-center space-x-4 lg:space-x-8 mt-3">
-                <a href="#home" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Home</a>
-                <a href="#about" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">About</a>
-                <a href="#themes" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Themes</a>
-                <a href="#rules" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Rules</a>
-                <a href="#register" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Register</a>
-            </div>
-            <button class="md:hidden text-white absolute top-4 right-4 sm:static sm:top-auto sm:right-auto" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
+
+        <!-- Compact Navigation (visible when scrolling) -->
+        <div id="compactNav" class="w-full px-3 sm:px-6 py-3 hidden">
+            <div class="flex flex-col items-center space-y-3">
+                <!-- MEMEVERSE 3.0 Title -->
+                <h1 class="text-xl xs:text-2xl md:text-3xl font-bold text-center text-white bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
+                    MEMEVERSE 3.0
+                </h1>
+                <!-- Navigation Links -->
+                <div class="flex justify-center items-center space-x-4 lg:space-x-6">
+                    <a href="#home" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Home</a>
+                    <a href="#about" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">About</a>
+                    <a href="#themes" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Themes</a>
+                    <a href="#rules" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Rules</a>
+                    <a href="#register" class="hover:text-purple-400 transition-colors font-medium text-sm uppercase tracking-wider">Register</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-white absolute top-4 right-4" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
     </nav>
     
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed top-0 left-0 w-full h-full bg-gray-900/95 backdrop-blur-sm z-40 hidden md:hidden flex-col">
+    <div id="mobileMenu" class="fixed top-0 left-0 w-full h-full bg-gray-900/95 backdrop-blur-sm z-40 hidden md:hidden flex flex-col items-center justify-center text-center">
         <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
             <a href="#home" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">Home</a>
             <a href="#about" onclick="toggleMenu()" class="hover:text-purple-400 transition-colors">About</a>
@@ -231,8 +246,8 @@
     </div>
 
     <!-- Landing Page -->
-    <section id="home" class="min-h-screen gradient-bg flex items-center justify-center relative pt-24 md:pt-32 pb-16">
-        <div class="container mx-auto px-3 sm:px-6 text-center">
+    <section id="home" class="w-full gradient-bg flex items-center justify-center relative pt-96 md:pt-[28rem] pb-16 px-3">
+        <div class="w-full max-w-2xl sm:max-w-3xl mx-auto px-3 text-center">
             <div data-aos="fade-down" data-aos-duration="1000" class="pt-8">
                 <h1 class="text-4xl xs:text-5xl md:text-8xl font-bold mb-4 text-white leading-tight">
                     MEMEVERSE 3.0
@@ -243,8 +258,8 @@
             </div>
             
             <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" class="mb-12">
-                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 xs:p-6 md:p-8 max-w-full md:max-w-2xl mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 text-center">
+                <div class="bg-gradient-to-r from-purple-600/20 to-blue-600/20 shadow-lg rounded-2xl w-full max-w-full p-4 xs:p-6 md:p-8 mx-auto overflow-x-hidden mb-4">
+                    <div class="flex flex-col md:grid md:grid-cols-3 gap-y-4 md:gap-6 text-center items-center md:items-stretch w-full">
                         <div>
                             <i class="fas fa-calendar-alt text-3xl text-purple-300 mb-2"></i>
                             <p class="font-semibold">Competition Date</p>
@@ -280,11 +295,11 @@
     <section id="about" class="py-20 bg-gray-800 relative z-10">
         <div class="container mx-auto px-6">
             <div data-aos="fade-up" class="text-center mb-16">
-                <h2 class="text-5xl font-bold gradient-text mb-6">About Memeverse 3.0</h2>
+                <h2 class="text-3xl xs:text-4xl md:text-5xl font-bold gradient-text mb-6 break-words">About Memeverse 3.0</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto"></div>
             </div>
             
-            <div class="max-w-7xl mx-auto">
+            <div class="w-full max-w-full px-3 md:max-w-7xl md:mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
                     <div data-aos="fade-right" data-aos-duration="1000" class="space-y-8">
                         <div class="text-center lg:text-left">
@@ -303,7 +318,7 @@
                             </p>
                         </div>
                         
-                        <div class="bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-4 xs:p-6 rounded-2xl">
+                        <div class="bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-4 xs:p-4 xs:p-6 rounded-2xl">
                             <h4 class="text-base xs:text-xl font-bold mb-3 xs:mb-4 text-center gradient-text">Why Participate?</h4>
                             <ul class="space-y-3 text-gray-300">
                                 <li class="flex items-center"><i class="fas fa-star text-yellow-400 mr-3"></i>Showcase your creativity</li>
@@ -318,32 +333,32 @@
                         <h4 class="text-2xl font-bold text-center mb-8 gradient-text neon-glow">Competition Highlights</h4>
                         
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div class="p-4 xs:p-6 rounded-2xl text-center border-4 border-transparent bg-purple-600/20 animated-gradient-border hover:scale-105 hover:shadow-xl transition-all duration-300">
+                            <div class="p-4 xs:p-4 xs:p-6 rounded-2xl text-center border-4 border-transparent bg-purple-600/20 animated-gradient-border hover:scale-105 hover:shadow-xl transition-all duration-300">
                                 <div class="text-4xl mb-4">🏆</div>
                                 <h4 class="font-bold text-xl mb-2 text-purple-300">Competition</h4>
                                 <p class="text-purple-200">Two Rounds Format</p>
                             </div>
                             
-                            <div class="p-4 xs:p-6 rounded-2xl text-center border-4 border-transparent bg-blue-600/20 animated-gradient-border hover:scale-105 hover:shadow-xl transition-all duration-300">
+                            <div class="p-4 xs:p-4 xs:p-6 rounded-2xl text-center border-4 border-transparent bg-blue-600/20 animated-gradient-border hover:scale-105 hover:shadow-xl transition-all duration-300">
                                 <div class="text-4xl mb-4">🎯</div>
                                 <h4 class="font-bold text-xl mb-2 text-blue-300">Themes</h4>
                                 <p class="text-blue-200">6 Unique Categories</p>
                             </div>
                             
-                            <div class="p-4 xs:p-6 rounded-2xl text-center border-4 border-transparent bg-green-600/20 animated-gradient-border hover:scale-105 hover:shadow-xl transition-all duration-300">
+                            <div class="p-4 xs:p-4 xs:p-6 rounded-2xl text-center border-4 border-transparent bg-green-600/20 animated-gradient-border hover:scale-105 hover:shadow-xl transition-all duration-300">
                                 <div class="text-4xl mb-4">👥</div>
                                 <h4 class="font-bold text-xl mb-2 text-green-300">Participants</h4>
                                 <p class="text-green-200">All Departments Welcome</p>
                             </div>
                             
-                            <div class="p-4 xs:p-6 rounded-2xl text-center border-4 border-transparent bg-pink-600/20 animated-gradient-border hover:scale-105 hover:shadow-xl transition-all duration-300">
+                            <div class="p-4 xs:p-4 xs:p-6 rounded-2xl text-center border-4 border-transparent bg-pink-600/20 animated-gradient-border hover:scale-105 hover:shadow-xl transition-all duration-300">
                                 <div class="text-4xl mb-4">🎨</div>
                                 <h4 class="font-bold text-xl mb-2 text-pink-300">Format</h4>
                                 <p class="text-pink-200">Individual Participation</p>
                             </div>
                         </div>
                         
-                        <div class="bg-gray-900/50 backdrop-blur-sm p-4 xs:p-6 rounded-2xl border border-gray-600/30 mt-6 xs:mt-8">
+                        <div class="bg-gray-900/50 backdrop-blur-sm p-4 xs:p-4 xs:p-6 rounded-2xl border border-gray-600/30 mt-6 xs:mt-8">
                             <div class="text-center">
                                 <div class="text-2xl xs:text-4xl mb-2 xs:mb-4">🎉</div>
                                 <h4 class="text-base xs:text-xl font-bold mb-2 xs:mb-3 text-yellow-300">Ready to Join?</h4>
@@ -493,7 +508,7 @@
             </div>
             
             <div class="max-w-4xl mx-auto">
-                <div data-aos="fade-up" data-aos-delay="100" class="bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-12 rounded-3xl text-center">
+                <div data-aos="fade-up" data-aos-delay="100" class="bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-4 xs:p-8 md:p-12 rounded-3xl text-center">
                     <div class="text-8xl mb-8">🎯</div>
                     <h3 class="text-4xl font-bold mb-6 gradient-text">Two Round Competition</h3>
                     <p class="text-xl text-gray-300 mb-8 leading-relaxed">
@@ -502,25 +517,25 @@
                         Give it your all in both rounds for a shot at glory!
                     </p>
                     
-                    <div class="grid md:grid-cols-3 gap-8 mt-12">
-                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mt-8 md:mt-12">
+                        <div class="bg-white/10 backdrop-blur-sm p-4 xs:p-6 rounded-2xl">
                             <div class="text-4xl mb-4">📝</div>
                             <h4 class="text-xl font-bold mb-2 text-purple-300">Step 1: Register</h4>
                             <p class="text-gray-300">Fill the registration form and select your theme</p>
                         </div>
-                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl">
+                        <div class="bg-white/10 backdrop-blur-sm p-4 xs:p-6 rounded-2xl">
                             <div class="text-4xl mb-4">🎨</div>
                             <h4 class="text-xl font-bold mb-2 text-blue-300">Step 2: Create</h4>
                             <p class="text-gray-300">Design your meme based on chosen theme</p>
                         </div>
-                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl">
+                        <div class="bg-white/10 backdrop-blur-sm p-4 xs:p-6 rounded-2xl">
                             <div class="text-4xl mb-4">🚀</div>
                             <h4 class="text-xl font-bold mb-2 text-green-300">Step 3: Submit</h4>
                             <p class="text-gray-300">Upload your meme before the deadline</p>
                         </div>
                     </div>
                     
-                    <div class="mt-12 p-6 bg-yellow-600/20 rounded-2xl">
+                    <div class="mt-8 xs:mt-12 p-4 xs:p-6 bg-yellow-600/20 rounded-2xl">
                         <div class="flex items-center justify-center mb-4">
                             <i class="fas fa-calendar-alt text-3xl text-yellow-400 mr-4"></i>
                             <h4 class="text-2xl font-bold text-yellow-300">Submission Deadline</h4>
@@ -541,10 +556,10 @@
                 <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-6"></div>
             </div>
             
-            <div class="max-w-2xl mx-auto">
-                <div data-aos="fade-up" data-aos-delay="200" class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/20">
-                    <form class="space-y-6" id="registrationForm">
-                        <div class="grid md:grid-cols-2 gap-6">
+            <div class="max-w-2xl mx-auto px-2">
+                <div data-aos="fade-up" data-aos-delay="200" class="bg-gray-900/50 backdrop-blur-sm p-4 xs:p-8 rounded-2xl border border-purple-500/20">
+                    <form class="space-y-4 xs:space-y-6" id="registrationForm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
                                 <label class="block text-purple-300 font-semibold mb-2">Full Name *</label>
                                 <input type="text" name="name" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" placeholder="Enter your name" required>
@@ -555,7 +570,7 @@
                             </div>
                         </div>
                         
-                        <div class="grid md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
                                 <label class="block text-purple-300 font-semibold mb-2">Year *</label>
                                 <select name="year" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:outline-none transition-colors text-sm xs:text-base" required>
@@ -708,6 +723,31 @@
                 mascot.classList.remove('bounce');
             }, 500);
         }
+
+        // Navbar scroll behavior
+        let lastScrollTop = 0;
+        let isAtTop = true;
+        
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const fullHeader = document.getElementById('fullHeader');
+            const compactNav = document.getElementById('compactNav');
+            
+            // Check if at top of page
+            if (scrollTop <= 50) {
+                // At top - show full header
+                fullHeader.classList.remove('hidden');
+                compactNav.classList.add('hidden');
+                isAtTop = true;
+            } else {
+                // Scrolled down - show compact nav only
+                fullHeader.classList.add('hidden');
+                compactNav.classList.remove('hidden');
+                isAtTop = false;
+            }
+            
+            lastScrollTop = scrollTop;
+        });
 
         // Initialize Supabase
         const supabaseUrl = 'https://qdyetknifporssjravoi.supabase.co';
