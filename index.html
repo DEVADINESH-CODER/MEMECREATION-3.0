@@ -121,9 +121,49 @@
             0%, 100% { transform: translateX(-50%) translateY(0); }
             50% { transform: translateX(-50%) translateY(-10px); }
         }
-    </style>
+    .animated-gradient-border {
+  border-image: linear-gradient(90deg, #a78bfa 0%, #38bdf8 100%);
+  border-image-slice: 1;
+  animation: borderMove 2s linear infinite;
+}
+@keyframes borderMove {
+  0% { border-image-source: linear-gradient(90deg, #a78bfa 0%, #38bdf8 100%); }
+  100% { border-image-source: linear-gradient(270deg, #a78bfa 0%, #38bdf8 100%); }
+}
+.neon-glow {
+  text-shadow: 0 0 8px #a78bfa, 0 0 16px #38bdf8, 0 0 4px #fff;
+  animation: neonFlicker 2s infinite alternate;
+}
+.floating-emoji {
+  position: absolute;
+  font-size: 2.5rem;
+  opacity: 0.18;
+  filter: blur(0.5px);
+  pointer-events: none;
+  z-index: 1;
+  animation: floatEmoji 7s ease-in-out infinite alternate;
+}
+.floating-emoji:nth-child(2) { animation-duration: 8s; }
+.floating-emoji:nth-child(3) { animation-duration: 10s; }
+.floating-emoji:nth-child(4) { animation-duration: 12s; }
+.floating-emoji:nth-child(5) { animation-duration: 9s; }
+@keyframes floatEmoji {
+  0% { transform: translateY(0) scale(1) rotate(-4deg); }
+  100% { transform: translateY(-24px) scale(1.08) rotate(4deg); }
+}
+@keyframes neonFlicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; filter: brightness(1.2); }
+}
+</style>
 </head>
 <body class="bg-gray-900 text-white overflow-x-hidden">
+    <!-- Floating Meme Emojis Background -->
+    <div class="floating-emoji" style="left:10vw;top:12vh;">😂</div>
+    <div class="floating-emoji" style="left:80vw;top:18vh;">🤖</div>
+    <div class="floating-emoji" style="left:25vw;top:80vh;">🎉</div>
+    <div class="floating-emoji" style="left:60vw;top:70vh;">😈</div>
+    <div class="floating-emoji" style="left:50vw;top:35vh;">🧠</div>
     <!-- Floating Mascot -->
     <div class="mascot floating-animation" onclick="bounceMascot()">🤖</div>
     
@@ -191,7 +231,7 @@
     </div>
 
     <!-- Landing Page -->
-    <section id="home" class="min-h-screen gradient-bg flex items-center justify-center relative pt-32 pb-16">
+    <section id="home" class="min-h-screen gradient-bg flex items-center justify-center relative pt-24 md:pt-32 pb-16">
         <div class="container mx-auto px-3 sm:px-6 text-center">
             <div data-aos="fade-down" data-aos-duration="1000" class="pt-8">
                 <h1 class="text-4xl xs:text-5xl md:text-8xl font-bold mb-4 text-white leading-tight">
@@ -245,26 +285,26 @@
             </div>
             
             <div class="max-w-7xl mx-auto">
-                <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
                     <div data-aos="fade-right" data-aos-duration="1000" class="space-y-8">
                         <div class="text-center lg:text-left">
-                            <div class="text-6xl mb-6">🎭</div>
-                            <h3 class="text-3xl font-bold mb-6 text-purple-300">The Ultimate Meme Battle</h3>
+                            <div class="text-4xl xs:text-6xl mb-4 xs:mb-6">🎭</div>
+                            <h3 class="text-xl xs:text-2xl md:text-3xl font-bold mb-4 xs:mb-6 text-purple-300">The Ultimate Meme Battle</h3>
                         </div>
                         
-                        <div class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/20">
-                            <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        <div class="bg-gray-900/50 backdrop-blur-sm p-4 xs:p-8 rounded-2xl border border-purple-500/20">
+                            <p class="text-base xs:text-lg text-gray-300 mb-4 xs:mb-6 leading-relaxed">
                                 Memeverse 3.0 is the most creative and hilarious meme competition designed exclusively for 2nd and 3rd-year students from all engineering departments. 
                                 It's where creativity meets humor, and where the best memes rise to legendary status!
                             </p>
-                            <p class="text-lg text-gray-300 leading-relaxed">
+                            <p class="text-base xs:text-lg text-gray-300 leading-relaxed">
                                 Organized at Adhiparasakthi Engineering College, 
                                 this competition celebrates the art of meme-making and digital creativity across all engineering disciplines.
                             </p>
                         </div>
                         
-                        <div class="bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-6 rounded-2xl">
-                            <h4 class="text-xl font-bold mb-4 text-center gradient-text">Why Participate?</h4>
+                        <div class="bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-4 xs:p-6 rounded-2xl">
+                            <h4 class="text-base xs:text-xl font-bold mb-3 xs:mb-4 text-center gradient-text">Why Participate?</h4>
                             <ul class="space-y-3 text-gray-300">
                                 <li class="flex items-center"><i class="fas fa-star text-yellow-400 mr-3"></i>Showcase your creativity</li>
                                 <li class="flex items-center"><i class="fas fa-trophy text-yellow-400 mr-3"></i>Win exciting prizes</li>
@@ -275,40 +315,40 @@
                     </div>
                     
                     <div data-aos="fade-left" data-aos-duration="1000" class="space-y-6">
-                        <h4 class="text-2xl font-bold text-center mb-8 gradient-text">Competition Highlights</h4>
+                        <h4 class="text-2xl font-bold text-center mb-8 gradient-text neon-glow">Competition Highlights</h4>
                         
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div class="bg-purple-600/20 p-6 rounded-2xl text-center border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300">
+                            <div class="p-4 xs:p-6 rounded-2xl text-center border-4 border-transparent bg-purple-600/20 animated-gradient-border hover:scale-105 hover:shadow-xl transition-all duration-300">
                                 <div class="text-4xl mb-4">🏆</div>
                                 <h4 class="font-bold text-xl mb-2 text-purple-300">Competition</h4>
-                                <p class="text-purple-200">Single Round Format</p>
+                                <p class="text-purple-200">Two Rounds Format</p>
                             </div>
                             
-                            <div class="bg-blue-600/20 p-6 rounded-2xl text-center border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300">
+                            <div class="p-4 xs:p-6 rounded-2xl text-center border-4 border-transparent bg-blue-600/20 animated-gradient-border hover:scale-105 hover:shadow-xl transition-all duration-300">
                                 <div class="text-4xl mb-4">🎯</div>
                                 <h4 class="font-bold text-xl mb-2 text-blue-300">Themes</h4>
                                 <p class="text-blue-200">6 Unique Categories</p>
                             </div>
                             
-                            <div class="bg-green-600/20 p-6 rounded-2xl text-center border border-green-500/30 hover:border-green-400/50 transition-all duration-300">
+                            <div class="p-4 xs:p-6 rounded-2xl text-center border-4 border-transparent bg-green-600/20 animated-gradient-border hover:scale-105 hover:shadow-xl transition-all duration-300">
                                 <div class="text-4xl mb-4">👥</div>
                                 <h4 class="font-bold text-xl mb-2 text-green-300">Participants</h4>
                                 <p class="text-green-200">All Departments Welcome</p>
                             </div>
                             
-                            <div class="bg-pink-600/20 p-6 rounded-2xl text-center border border-pink-500/30 hover:border-pink-400/50 transition-all duration-300">
+                            <div class="p-4 xs:p-6 rounded-2xl text-center border-4 border-transparent bg-pink-600/20 animated-gradient-border hover:scale-105 hover:shadow-xl transition-all duration-300">
                                 <div class="text-4xl mb-4">🎨</div>
                                 <h4 class="font-bold text-xl mb-2 text-pink-300">Format</h4>
                                 <p class="text-pink-200">Individual Participation</p>
                             </div>
                         </div>
                         
-                        <div class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-600/30 mt-8">
+                        <div class="bg-gray-900/50 backdrop-blur-sm p-4 xs:p-6 rounded-2xl border border-gray-600/30 mt-6 xs:mt-8">
                             <div class="text-center">
-                                <div class="text-4xl mb-4">🎉</div>
-                                <h4 class="text-xl font-bold mb-3 text-yellow-300">Ready to Join?</h4>
+                                <div class="text-2xl xs:text-4xl mb-2 xs:mb-4">🎉</div>
+                                <h4 class="text-base xs:text-xl font-bold mb-2 xs:mb-3 text-yellow-300">Ready to Join?</h4>
                                 <p class="text-gray-300 mb-4">Register now and let your creativity shine!</p>
-                                <a href="#register" class="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-bold hover:from-purple-700 hover:to-blue-700 transition-all duration-300">
+                                <a href="#register" class="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white w-full xs:w-auto px-6 py-2 xs:py-3 rounded-full font-bold hover:from-purple-700 hover:to-blue-700 transition-all duration-300">
                                     Start Registration →
                                 </a>
                             </div>
@@ -319,47 +359,60 @@
         </div>
     </section>
 
+    <!-- Wavy Divider -->
+    <div class="-mt-2">
+      <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-16 md:h-24">
+        <path d="M0,40 C360,120 1080,-40 1440,40 L1440,100 L0,100 Z" fill="url(#memeverse-gradient)"/>
+        <defs>
+          <linearGradient id="memeverse-gradient" x1="0" x2="1440" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#a78bfa" />
+            <stop offset="1" stop-color="#38bdf8" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
     <!-- Themes Section -->
     <section id="themes" class="py-20 bg-gray-900">
         <div class="container mx-auto px-6">
             <div data-aos="fade-up" class="text-center mb-16">
-                <h2 class="text-5xl font-bold gradient-text mb-6">Meme Themes</h2>
-                <p class="text-xl text-gray-300">Choose your battlefield and create the ultimate meme!</p>
+                <h2 class="text-2xl xs:text-4xl md:text-5xl font-bold gradient-text mb-4 xs:mb-6">Meme Themes</h2>
+                <p class="text-base xs:text-xl text-gray-300">Choose your battlefield and create the ultimate meme!</p>
                 <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-6"></div>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div data-aos="fade-up" data-aos-delay="100" class="theme-card p-8 rounded-2xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                <div data-aos="fade-up" data-aos-delay="100" class="theme-card p-4 xs:p-6 md:p-8 rounded-2xl">
                     <div class="text-5xl mb-4">💻</div>
                     <h3 class="text-2xl font-bold mb-4 text-purple-300">Online vs Offline Classes</h3>
                     <p class="text-gray-300">The eternal struggle between pajama comfort and actual pants!</p>
                 </div>
                 
-                <div data-aos="fade-up" data-aos-delay="200" class="theme-card p-8 rounded-2xl">
+                <div data-aos="fade-up" data-aos-delay="200" class="theme-card p-4 xs:p-6 md:p-8 rounded-2xl">
                     <div class="text-5xl mb-4">🤖</div>
                     <h3 class="text-2xl font-bold mb-4 text-blue-300">ChatGPT Life</h3>
                     <p class="text-gray-300">When AI becomes your best study buddy and worst enemy!</p>
                 </div>
                 
-                <div data-aos="fade-up" data-aos-delay="300" class="theme-card p-8 rounded-2xl">
+                <div data-aos="fade-up" data-aos-delay="300" class="theme-card p-4 xs:p-6 md:p-8 rounded-2xl">
                     <div class="text-5xl mb-4">📱</div>
                     <h3 class="text-2xl font-bold mb-4 text-green-300">Instagram vs Reality</h3>
                     <p class="text-gray-300">The art of making your life look way cooler than it actually is!</p>
                 </div>
                 
-                <div data-aos="fade-up" data-aos-delay="400" class="theme-card p-8 rounded-2xl">
+                <div data-aos="fade-up" data-aos-delay="400" class="theme-card p-4 xs:p-6 md:p-8 rounded-2xl">
                     <div class="text-5xl mb-4">😈</div>
                     <h3 class="text-2xl font-bold mb-4 text-red-300">Toxic Friendships</h3>
                     <p class="text-gray-300">Those friends who are chaos but you can't live without them!</p>
                 </div>
                 
-                <div data-aos="fade-up" data-aos-delay="500" class="theme-card p-8 rounded-2xl">
+                <div data-aos="fade-up" data-aos-delay="500" class="theme-card p-4 xs:p-6 md:p-8 rounded-2xl">
                     <div class="text-5xl mb-4">💬</div>
                     <h3 class="text-2xl font-bold mb-4 text-yellow-300">Tanglish Messages</h3>
                     <p class="text-gray-300">When Tamil meets English and creates pure comedy gold!</p>
                 </div>
                 
-                <div data-aos="fade-up" data-aos-delay="600" class="theme-card p-8 rounded-2xl">
+                <div data-aos="fade-up" data-aos-delay="600" class="theme-card p-4 xs:p-6 md:p-8 rounded-2xl">
                     <div class="text-5xl mb-4">🧠</div>
                     <h3 class="text-2xl font-bold mb-4 text-pink-300">Brain During Exams</h3>
                     <p class="text-gray-300">The epic battle between knowledge and complete mental breakdown!</p>
@@ -372,12 +425,12 @@
     <section id="rules" class="py-20 bg-gray-800">
         <div class="container mx-auto px-6">
             <div data-aos="fade-up" class="text-center mb-16">
-                <h2 class="text-5xl font-bold gradient-text mb-6">Rules & Guidelines</h2>
+                <h2 class="text-2xl xs:text-4xl md:text-5xl font-bold gradient-text mb-4 xs:mb-6">Rules & Guidelines</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto"></div>
             </div>
             
             <div class="max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                     <div data-aos="fade-right" data-aos-delay="100" class="bg-purple-600/10 p-8 rounded-2xl">
                         <div class="flex items-center mb-6">
                             <i class="fas fa-users text-3xl text-purple-400 mr-4"></i>
@@ -435,17 +488,18 @@
         <div class="container mx-auto px-6">
             <div data-aos="fade-up" class="text-center mb-16">
                 <h2 class="text-5xl font-bold gradient-text mb-6">Competition Format</h2>
-                <p class="text-xl text-gray-300">One round, unlimited creativity!</p>
+                <p class="text-xl text-gray-300">Two rounds, double the fun and creativity!</p>
                 <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-6"></div>
             </div>
             
             <div class="max-w-4xl mx-auto">
                 <div data-aos="fade-up" data-aos-delay="100" class="bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-12 rounded-3xl text-center">
                     <div class="text-8xl mb-8">🎯</div>
-                    <h3 class="text-4xl font-bold mb-6 gradient-text">Single Round Competition</h3>
+                    <h3 class="text-4xl font-bold mb-6 gradient-text">Two Round Competition</h3>
                     <p class="text-xl text-gray-300 mb-8 leading-relaxed">
-                        Choose your favorite theme, create your most hilarious meme, and submit it for judging. 
-                        It's that simple! The best memes across all themes will be crowned winners.
+                        Round 1: Submit your meme based on your chosen theme.<br>
+                        Round 2: The best from Round 1 compete for top prizes!<br>
+                        Give it your all in both rounds for a shot at glory!
                     </p>
                     
                     <div class="grid md:grid-cols-3 gap-8 mt-12">
@@ -471,7 +525,7 @@
                             <i class="fas fa-calendar-alt text-3xl text-yellow-400 mr-4"></i>
                             <h4 class="text-2xl font-bold text-yellow-300">Submission Deadline</h4>
                         </div>
-                        <p class="text-xl text-gray-300">July 30, 2024 - 11:59 PM</p>
+                        <p class="text-xl text-gray-300">July 29, 2024 - 11:59 PM</p>
                     </div>
                 </div>
             </div>
@@ -572,32 +626,32 @@
     <section id="gallery" class="py-20 bg-gray-900">
         <div class="container mx-auto px-6">
             <div data-aos="fade-up" class="text-center mb-16">
-                <h2 class="text-5xl font-bold gradient-text mb-6">Gallery</h2>
-                <p class="text-xl text-gray-300">Coming soon - Epic memes and event highlights!</p>
+                <h2 class="text-2xl xs:text-4xl md:text-5xl font-bold gradient-text mb-4 xs:mb-6">Gallery</h2>
+                <p class="text-base xs:text-xl text-gray-300">Coming soon - Epic memes and event highlights!</p>
                 <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-6"></div>
             </div>
             
             <div data-aos="fade-up" data-aos-delay="200" class="text-center">
-                <div class="bg-gray-800/50 backdrop-blur-sm p-16 rounded-2xl border border-purple-500/20">
-                    <div class="text-8xl mb-8">🎨</div>
-                    <h3 class="text-3xl font-bold mb-4 text-purple-300">Gallery Coming Soon!</h3>
-                    <p class="text-xl text-gray-300 mb-8">
+                <div class="bg-gray-800/50 backdrop-blur-sm p-4 xs:p-8 md:p-16 rounded-2xl border border-purple-500/20">
+                    <div class="text-4xl xs:text-8xl mb-4 xs:mb-8">🎨</div>
+                    <h3 class="text-xl xs:text-3xl font-bold mb-2 xs:mb-4 text-purple-300">Gallery Coming Soon!</h3>
+                    <p class="text-base xs:text-xl text-gray-300 mb-4 xs:mb-8">
                         This space will be filled with the most hilarious and creative memes from our competition!
                     </p>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
-                        <div class="bg-purple-600/20 p-6 rounded-xl">
+                    <div class="grid grid-cols-2 xs:grid-cols-2 md:grid-cols-4 gap-2 xs:gap-4 max-w-full md:max-w-2xl mx-auto">
+                        <div class="bg-purple-600/20 p-3 xs:p-6 rounded-xl">
                             <div class="text-3xl mb-2">😂</div>
                             <p class="text-sm">Winning Memes</p>
                         </div>
-                        <div class="bg-blue-600/20 p-6 rounded-xl">
+                        <div class="bg-blue-600/20 p-3 xs:p-6 rounded-xl">
                             <div class="text-3xl mb-2">📸</div>
                             <p class="text-sm">Event Photos</p>
                         </div>
-                        <div class="bg-green-600/20 p-6 rounded-xl">
+                        <div class="bg-green-600/20 p-3 xs:p-6 rounded-xl">
                             <div class="text-3xl mb-2">🏆</div>
                             <p class="text-sm">Award Ceremony</p>
                         </div>
-                        <div class="bg-pink-600/20 p-6 rounded-xl">
+                        <div class="bg-pink-600/20 p-3 xs:p-6 rounded-xl">
                             <div class="text-3xl mb-2">🎉</div>
                             <p class="text-sm">Highlights</p>
                         </div>
@@ -610,11 +664,11 @@
 
 
     <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-purple-500/20 py-12">
+    <footer class="bg-gray-900 border-t border-purple-500/20 py-8 xs:py-12">
         <div class="container mx-auto px-6">
             <div class="text-center">
-                <div class="text-4xl font-bold gradient-text mb-2">Memeverse 3.0</div>
-                <p class="text-gray-400">Where Memes Speak Louder Than Words</p>
+                <div class="text-xl xs:text-2xl md:text-4xl font-bold gradient-text mb-1 xs:mb-2">Memeverse 3.0</div>
+                <p class="text-xs xs:text-base text-gray-400">Where Memes Speak Louder Than Words</p>
         </div>
     </footer>
 
@@ -724,6 +778,8 @@
                 
                 // Show success message
                 alert(`🎉 Registration Successful!\n\n✅ Data saved to database\n\nName: ${registrationData.name}\nRoll Number: ${registrationData.rollnumber}\nDepartment: ${registrationData.dept}\nYear: ${registrationData.year}\n\nYour meme has been uploaded and registration completed successfully!`);
+                // Confetti burst
+                confettiBurst();
                 
                 // Reset form
                 this.reset();
@@ -835,6 +891,33 @@
                 nav.classList.add('bg-gray-900/90');
             }
         });
+    // Confetti burst animation using meme emojis
+    function confettiBurst() {
+      const emojis = ['😂','🤖','🎉','😈','🧠','🥳','🚀','💥'];
+      const form = document.getElementById('registrationForm');
+      const rect = form.getBoundingClientRect();
+      const centerX = rect.left + rect.width/2;
+      const centerY = rect.top + window.scrollY + 40;
+      for (let i = 0; i < 24; i++) {
+        const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+        const conf = document.createElement('div');
+        conf.textContent = emoji;
+        conf.style.position = 'absolute';
+        conf.style.left = (centerX + (Math.random()-0.5)*120) + 'px';
+        conf.style.top = (centerY + (Math.random()-0.5)*40) + 'px';
+        conf.style.fontSize = (Math.random() * 1.2 + 1.6) + 'rem';
+        conf.style.opacity = '1';
+        conf.style.pointerEvents = 'none';
+        conf.style.zIndex = 1000;
+        conf.style.transition = 'transform 1.2s cubic-bezier(.21,1.02,.73,.99), opacity 1.2s';
+        document.body.appendChild(conf);
+        setTimeout(() => {
+          conf.style.transform = `translateY(${90 + Math.random()*90}px) translateX(${(Math.random()-0.5)*180}px) rotate(${Math.random()*360}deg)`;
+          conf.style.opacity = '0';
+        }, 20);
+        setTimeout(() => conf.remove(), 1300);
+      }
+    }
     </script>
 
     <!-- Footer -->
