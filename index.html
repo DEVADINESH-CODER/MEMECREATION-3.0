@@ -841,6 +841,26 @@
         </div>
     </section>
 
+    <!-- Certificate Download Section -->
+    <section id="certificate-download" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div data-aos="fade-up" class="text-center mb-16">
+                <h2 class="text-5xl font-bold gradient-text mb-6">Download Your Certificate</h2>
+                <p class="text-xl text-gray-300">Enter your email to download your participation certificate.</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-6"></div>
+            </div>
+            <div class="max-w-xl mx-auto">
+                <form id="certificateForm" class="space-y-4">
+                    <input type="email" id="emailInput" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors" placeholder="Enter your email" required>
+                    <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        Download Certificate
+                    </button>
+                </form>
+                <p id="certificateMessage" class="text-center text-gray-400 mt-4"></p>
+            </div>
+        </div>
+    </section>
+
     <!-- Gallery Section -->
     <section id="gallery" class="py-20 bg-gray-900">
         <div class="container mx-auto px-6">
@@ -880,14 +900,34 @@
         </div>
     </section>
 
-
-
     <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-purple-500/20 py-8 xs:py-12">
+    <footer class="bg-gray-900 border-t border-gray-800 py-8 xs:py-12">
         <div class="container mx-auto px-6">
-            <div class="text-center">
-                <div class="text-xl xs:text-2xl md:text-4xl font-bold gradient-text mb-1 xs:mb-2">Memeverse 3.0</div>
-                <p class="text-xs xs:text-base text-gray-400">Where Memes Speak Louder Than Words</p>
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <img src="https://imgs.search.brave.com/u4cNggCd8oj5xtMo6fSkgB758PkEYi7g8KssWKz5iwY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ha20t/aW1nLWEtaW4udG9z/c2h1Yi5jb20vc2l0/ZXMvcmVzb3VyY2Vz/L2NhbXB1cy9wcm9k/L2ltZy9sb2dvLzIw/MjMvOS9sb2dvMTI0/NzMwNzU3MDg5Ny5q/cGc" alt="APEC Logo" class="h-12 w-auto mr-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Adhiparasakthi Engineering College</h3>
+                            <p class="text-gray-400">Melmaruvathur-603319</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://www.facebook.com/adhiparasakthiengineeringcollege/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-500 transition-colors" aria-label="Facebook">
+                        <i class="fab fa-facebook-f text-2xl"></i>
+                    </a>
+                    <a href="https://x.com/apenggcollege" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Twitter">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="https://www.youtube.com/user/AdhiparasakthiIn" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-red-600 transition-colors" aria-label="YouTube">
+                        <i class="fab fa-youtube text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p> 2025 Adhiparasakthi Engineering College. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
@@ -953,7 +993,7 @@
             'competition rounds': 'Competition Rounds Details:\n\n🎯 ROUND 1 - Submission Phase:\n• Submit your meme based on chosen theme\n• Deadline: July 31, 2025 (11:59 PM)\n• All registered participants compete\n• Judged on creativity, humor & theme adherence\n\n🏆 ROUND 2 - Final Battle:\n• Best memes from Round 1 selected\n• Final competition on August 01, 2025\n• Top winners announced\n• Prizes distributed\n\nBring your A-game for both rounds! 💪',
             'round 1': 'ROUND 1 - Submission Phase:\n\n📝 What to do:\n• Create your meme based on chosen theme\n• Upload through registration form\n• Submit before July 31, 2025 (11:59 PM)\n\n🎯 Judging Criteria:\n• Creativity & Originality (40%)\n• Humor & Relatability (40%)\n• Theme Adherence (20%)\n\n✅ Requirements:\n• JPG, PNG, or GIF format\n• Max 5MB file size\n• Original content only\n\nGood luck! 🍀',
             'round 2': 'ROUND 2 - Final Battle:\n\n🏆 What happens:\n• Best memes from Round 1 shortlisted\n• Final judging on August 01, 2025\n• Live announcement at APEC Campus\n• Winners receive prizes & certificates\n\n🎉 Event Schedule:\n• Venue: APEC Campus\n• Date: August 01, 2025\n• Time: TBA\n\n🥇 What you get:\n• Recognition certificates\n• Exciting prizes\n• Gallery feature\n• Ultimate memer status!\n\nSee you at the finals! 🚀',
-            'rules': 'Complete Competition Rules:\n\n👥 ELIGIBILITY:\n• 2nd & 3rd year students only\n• All engineering departments\n• Individual participation\n• One entry per participant\n\n📱 CONTENT RULES:\n• Original content only\n• No offensive/inappropriate content\n• Must relate to chosen theme\n• Accepted formats: JPG, PNG, GIF\n• Max file size: 5MB\n\n⏰ SUBMISSION:\n• Submit before July 31, 2025 (11:59 PM)\n• Upload through registration form\n• Include all required details\n\n🏆 JUDGING:\n• Creativity & originality\n• Humor & relatability\n• Theme adherence\n\nPlay fair and have fun! 🎮',
+            'rules': 'Complete Competition Rules:\n\n👥 ELIGIBILITY:\n• 2nd & 3rd year students only\n• All engineering departments\n• Individual participation\n• One entry per participant\n\n📱 CONTENT RULES:\n• Original content only\n• No offensive or inappropriate content\n• Must relate to chosen theme\n• Accepted formats: JPG, PNG, GIF\n• Max file size: 5MB\n\n⏰ SUBMISSION:\n• Submit before July 31, 2025 (11:59 PM)\n• Upload through registration form\n• Include all required details\n\n🏆 JUDGING:\n• Creativity & originality\n• Humor & relatability\n• Theme adherence\n\nPlay fair and have fun! 🎮',
             'deadline': 'Important deadlines:\n\n📅 Registration & Submission: July 31, 2025 (11:59 PM)\n🏆 Competition Date: August 01, 2025\n📍 Venue: APEC Campus\n\nDon\'t miss out! Register now! ⏰',
             'when': 'Important deadlines:\n\n📅 Registration & Submission: July 31, 2025 (11:59 PM)\n🏆 Competition Date: August 01, 2025\n📍 Venue: APEC Campus\n\nDon\'t miss out! Register now! ⏰',
             'prizes': '🏆 AMAZING PRIZES AWAIT! 🏆\n\n🥇 FIRST PRIZE - Ultimate Creative Bundle (Worth ₹4,000+):\n• Figma Pro (1 Year) - Advanced design & prototyping\n• Canva Pro (1 Year) - 100M+ premium assets\n• Unlimited files, premium templates & effects\n\n🥈 SECOND PRIZE - Design Pro Access (Worth ₹2,000+):\n• Figma Pro (1 Year Subscription)\n• Advanced prototyping & design systems\n• Professional workflows & team libraries\n\n🥉 THIRD PRIZE - Creative Power (Worth ₹2,000+):\n• Canva Pro (1 Year Subscription)\n• Background remover & Magic Resize\n• Premium animations & 1TB storage\n\n🎁 ALL WINNERS GET:\n• Digital certificates\n• LinkedIn winner badges\n• Portfolio building guidance\n• Design community access\n\nTotal prize value: ₹8,000+! 💰',
@@ -1277,37 +1317,25 @@
     }
     </script>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800 py-8">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <div class="flex items-center">
-                        <img src="https://imgs.search.brave.com/u4cNggCd8oj5xtMo6fSkgB758PkEYi7g8KssWKz5iwY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ha20t/aW1nLWEtaW4udG9z/c2h1Yi5jb20vc2l0/ZXMvcmVzb3VyY2Vz/L2NhbXB1cy9wcm9k/L2ltZy9sb2dvLzIw/MjMvOS9sb2dvMTI0/NzMwNzU3MDg5Ny5q/cGc" alt="APEC Logo" class="h-12 w-auto mr-4">
-                        <div>
-                            <h3 class="text-xl font-bold text-white">Adhiparasakthi Engineering College</h3>
-                            <p class="text-gray-400">Melmaruvathur-603319</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="https://www.facebook.com/adhiparasakthiengineeringcollege/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-500 transition-colors" aria-label="Facebook">
-                        <i class="fab fa-facebook-f text-2xl"></i>
-                    </a>
-                    <a href="https://x.com/apenggcollege" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Twitter">
-                        <i class="fab fa-twitter text-2xl"></i>
-                    </a>
-                    <a href="https://www.youtube.com/user/AdhiparasakthiIn" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-red-600 transition-colors" aria-label="YouTube">
-                        <i class="fab fa-youtube text-2xl"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-                <p> 2025 Adhiparasakthi Engineering College. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'964aef5c93da8019',t:'MTc1MzQzODkzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>
+        document.getElementById('certificateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value.trim();
+            const fileName = `${email}.png`;
+            const fileUrl = `https://jzsqzjadanbwsnugavql.supabase.co/storage/v1/object/public/certificates/${fileName}`;
+            
+            fetch(fileUrl, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = fileUrl;
+                    } else {
+                        document.getElementById('certificateMessage').textContent = 'No certificate found for this email.';
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('certificateMessage').textContent = 'Error checking certificate. Please try again later.';
+                });
+        });
+    </script>
 </body>
 </html>
